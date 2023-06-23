@@ -25,7 +25,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'non-existant',
+    path: '**',
     loadChildren: () =>
       import('./pages/non-existant/non-existant.module').then(
         (m) => m.NonExistantModule
