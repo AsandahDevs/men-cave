@@ -7,4 +7,7 @@ An e-commerce site that caters for men of relevance ,whether you're in a field o
 * HTML
 * CSS (Material UI)
 * TypeScript
-* Angular 
+* Angular
+  
+## Disclaimer
+This site uses the <a href="https://fakestoreapi.com/" target="_blank">fakestoreapi</a> to generate images of products.
