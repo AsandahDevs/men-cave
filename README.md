@@ -5,7 +5,7 @@ An e-commerce site that caters for men of relevance ,whether you're in a field o
 ## Tools and technologies
 
 * HTML
-* CSS (Material UI)
+* CSS (MD bootstrap)
 * TypeScript
 * Angular
   
