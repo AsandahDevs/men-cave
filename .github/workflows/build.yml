@@ -15,6 +15,8 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Install dependencies
         run: npm install
+      - name : Install angular v15
+        run:  npm install @angular/cli@15.0.5
       - name: Test and coverage
         run:  ng test --code-coverage
       - name: SonarCloud Scan
