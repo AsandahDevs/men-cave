@@ -17,16 +17,12 @@ jobs:
         run: npm install
       - name: Npm CI
         run: npm ci
-      - name : Install puppeteer and karma-chrome-launcher
+      - name: Install puppeteer and karma-chrome-launcher
         run: npm i -D puppeteer karma-chrome-launcher
       - name: Test and coverage
         run:  npm run test-headless
-      - name : build
+      - name : Build
         run: npm run build
-      - name: coverage location
-        run: cat coverage/men-cave/lcov.info
-      - name: artifacts
-        run: coverage/men-cave/lcov.info
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
