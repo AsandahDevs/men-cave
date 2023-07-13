@@ -10,7 +10,7 @@ import { HomeModule } from './pages/home/home.module';
 import { ProductsModule } from './pages/products/products.module';
 import { NonExistantModule } from './pages/non-existant/non-existant.module';
 import { ShoppingCartModule } from './pages/shopping-cart/shopping-cart.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,9 +25,9 @@ import { HttpClientModule } from '@angular/common/http';
     ProductsModule,
     NonExistantModule,
     ShoppingCartModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
