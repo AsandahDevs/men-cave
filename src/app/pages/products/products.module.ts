@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
 
+import { ComponentsModule } from 'src/app/components/components.module';
+
+
 
 @NgModule({
   declarations: [
@@ -11,7 +14,8 @@ import { ProductsComponent } from './products.component';
   ],
   imports: [
     CommonModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    ComponentsModule,
   ]
 })
 export class ProductsModule { }
