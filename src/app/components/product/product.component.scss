@@ -1,0 +1,10 @@
+.card{
+    width:250px;
+    height: 500px; /* Set the desired fixed height for the overall card contents */
+    overflow: hidden;
+
+    .card-img-top{
+        height: 300px; /* Set the desired fixed height for images*/
+        overflow: hidden;
+    }
+}
