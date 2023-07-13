@@ -1,1 +1,8 @@
-<p>product works!</p>
+<div class="card">
+    <img [src]="product.image" class="card-img-top" [alt]="product.title"/>
+    <div class="card-body">
+      <h5 class="card-title">{{product.title}}</h5>
+      <p class="card-text d-block text-truncate">{{product.description}}</p>
+      <a class="btn btn-dark">Read More</a>
+    </div>
+</div>
