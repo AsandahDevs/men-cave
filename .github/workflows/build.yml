@@ -15,12 +15,12 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Install dependencies
         run: npm install
-      - name: Npm CI
-        run: npm ci
-      - name : Install puppeteer and karma-chrome-launcher
+      - name: Install puppeteer and karma-chrome-launcher
         run: npm i -D puppeteer karma-chrome-launcher
       - name: Test and coverage
         run:  npm run test-headless
+      - name : Build
+        run: npm run build
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
