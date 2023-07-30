@@ -73,8 +73,16 @@ describe('ProductsDataService', () => {
       expect(products).toEqual(mockProducts);
     });
 
-    const req = httpMock.expectOne("https://fakestoreapi.com/products/category/men's%20clothing".replace(/ /g, '%20'));
+    const req = httpMock.expectOne("https://fakestoreapi.com/products/category/men's%20clothing");
     expect(req.request.method).toBe('GET');
     req.flush(mockProducts);
+  });
+
+  it('should replace spaces in the URL with %20', () => {
+
+    service.getProducts().subscribe();
+
+    const req = httpMock.expectOne("https://fakestoreapi.com/products/category/men's%20clothing");
+    expect(req.request.url).toContain("men's%20clothing");
   });
 });
