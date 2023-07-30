@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductsComponent } from './products.component';
 import { ProductsDataService } from 'src/app/services/products-data.service';
-import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs/internal/observable/of';
 import { Product } from 'src/app/interfaces/product';
 
