@@ -19,8 +19,6 @@ jobs:
         run: npm i -D puppeteer karma-chrome-launcher
       - name: Test and coverage
         run:  npm run test-headless
-      - name : Build
-        run: npm run build
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
