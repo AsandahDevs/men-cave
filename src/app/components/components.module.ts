@@ -15,5 +15,10 @@ import { SpinnerComponent } from './spinner/spinner.component';
   imports: [
     CommonModule,
   ],
+  exports: [
+    ButtonComponent,
+    ProductComponent,
+    SpinnerComponent,
+  ]
 })
 export class ComponentsModule { }

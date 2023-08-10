@@ -6,6 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 
+import { HomeModule } from './pages/home/home.module';
+import { ProductsModule } from './pages/products/products.module';
+import { NonExistantModule } from './pages/non-existant/non-existant.module';
+import { ShoppingCartModule } from './pages/shopping-cart/shopping-cart.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -14,9 +20,14 @@ import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MdbCollapseModule
+    MdbCollapseModule,
+    HomeModule,
+    ProductsModule,
+    NonExistantModule,
+    ShoppingCartModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
