@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'men-cave';
   imageURL: string = '/../assets/images/manCave.png'
+
+  constructor(public cartService:CartService){}
+
+  displayCartTotal(){
+    return this.cartService.getTotalProducts()
+  }
 }
