@@ -11,14 +11,19 @@ import { ProductsDataService } from 'src/app/services/products-data.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
-  menswear$!: Subscription
+  menswear$!: Subscription;
+  loading!:boolean 
+  message!:string
   constructor(private productService: ProductsDataService) {}
 
   ngOnInit() {
+    this.loading = true;
+    this.message = 'Loading...';
     this.menswear$ = this.productService
       .getProducts()
       .subscribe({
         next: (data:any) => {
+          this.loading = false;
           this.products = data
           console.log(this.products)
         },
