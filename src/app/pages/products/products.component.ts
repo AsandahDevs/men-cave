@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Product } from 'src/app/interfaces/product';
+import { CartService } from 'src/app/services/cart.service';
 
 import { ProductsDataService } from 'src/app/services/products-data.service';
 
@@ -14,7 +15,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   menswear$!: Subscription;
   loading!:boolean 
   message!:string
-  constructor(private productService: ProductsDataService) {}
+  constructor(private productService: ProductsDataService, public cartService:CartService) {}
 
   ngOnInit() {
     this.loading = true;
@@ -25,12 +26,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
         next: (data:any) => {
           this.loading = false;
           this.products = data
-          console.log(this.products)
         },
         error: (error: any) => {
           console.log(error);
         },
       } );
+  }
+
+  addToCart(item:Product){
+    console.log(item)
+    this.cartService.addProduct(item)
   }
 
   ngOnDestroy() {

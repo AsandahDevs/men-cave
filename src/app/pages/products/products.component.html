@@ -2,7 +2,7 @@
 <div class="container-fluid productsWallpaper">
     <div class="row">
         <div *ngFor="let product of products, let i = index" class="col-md-4 mt-5 justify-content-center">
-            <app-product [product]="product"></app-product>
+            <app-product (clickedProduct)="addToCart($event)" [product]="product"></app-product>
         </div>
     </div>
 </div>
