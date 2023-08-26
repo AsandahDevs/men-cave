@@ -5,6 +5,7 @@ import { ProductsDataService } from 'src/app/services/products-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs/internal/observable/of';
 import { Product } from 'src/app/interfaces/product';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
@@ -15,7 +16,7 @@ describe('ProductsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ProductsComponent],
       providers: [ProductsDataService],
-      imports: [HttpClientModule],
+      imports: [HttpClientModule,ComponentsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductsComponent);
