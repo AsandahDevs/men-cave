@@ -8,7 +8,6 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent {
- product!:Product
 
  constructor(private cartService:CartService){}
 
