@@ -18,4 +18,8 @@ export class ShoppingCartComponent {
  deleteItem(item:Product){
   this.cartService.deleteProduct(item)
  }
+
+ cartTotal(){
+  return this.cartService.getTotalProducts()
+ }
 }
