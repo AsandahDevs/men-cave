@@ -34,7 +34,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   addToCart(item:Product){
-    console.log(item)
     this.cartService.addProduct(item)
   }
 
