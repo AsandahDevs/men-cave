@@ -18,4 +18,8 @@ export class CartService {
   getTotalProducts(){
     return this.cart.length
   }
+
+  deleteProduct(item:Product){
+    this.cart = this.cart.filter(product=>product.id !== item?.id)
+  }
 }
