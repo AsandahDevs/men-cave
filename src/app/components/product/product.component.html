@@ -2,7 +2,7 @@
     <img [src]="product.image" class="card-img-top" [alt]="product.title"/>
     <div class="card-body">
       <h5 class="card-title">{{product.title}}</h5>
-      <p class="card-text d-block text-truncate">{{product.description}}</p>
-      <a class="btn btn-dark">Read More</a>
+      <p class="card-text d-block">{{product.price | currency:'ZAR '}}</p>
+      <a class="btn btn-dark" (click)="addToCart(product)">Add to cart</a>
     </div>
 </div>

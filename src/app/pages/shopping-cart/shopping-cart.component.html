@@ -1,1 +1,22 @@
-<p>shopping-cart works!</p>
+<h2 class="d-flex justify-content-center mt-2" *ngIf="cartTotal() === 0">Cart is empty !</h2>
+<div *ngFor="let item of displayCartItems(),let i=index" class="card mb-3 centre-align" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img
+          src={{item.image}}
+          alt="Trendy Pants and Shoes"
+          class="img-fluid rounded-start"
+        />
+      </div>
+      <div class="col-md-8">
+        <i class="fas fa-trash-alt" (click)="deleteItem(item)"></i>
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="card-text">
+          {{item.description}}
+          </p>
+          <p>Price: {{item.price | currency:'ZAR '}}</p>
+        </div>
+      </div>
+    </div>
+  </div>

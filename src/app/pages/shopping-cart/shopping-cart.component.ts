@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Product } from 'src/app/interfaces/product';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -7,4 +9,17 @@ import { Component } from '@angular/core';
 })
 export class ShoppingCartComponent {
 
+ constructor(private cartService:CartService){}
+
+ displayCartItems(){
+  return this.cartService.getCartItems()
+ }
+
+ deleteItem(item:Product){
+  this.cartService.deleteProduct(item)
+ }
+
+ cartTotal(){
+  return this.cartService.getTotalProducts()
+ }
 }
