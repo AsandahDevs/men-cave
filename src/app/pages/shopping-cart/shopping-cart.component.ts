@@ -19,7 +19,15 @@ export class ShoppingCartComponent {
   this.cartService.deleteProduct(item)
  }
 
- cartTotal(){
-  return this.cartService.getTotalProducts()
+  totalCartProducts(){
+    return this.cartService.getTotalProducts()
+  }
+
+ totalCartPrice(){
+  return this.cartService.getTotalCartPrice()
+ }
+
+ emptyCartItems(){
+  this.cartService.clearCart()
  }
 }
