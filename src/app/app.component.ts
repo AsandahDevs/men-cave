@@ -12,7 +12,7 @@ export class AppComponent {
 
   constructor(public cartService:CartService){}
 
-  displayCartTotal(){
+  totalCartProducts(){
     return this.cartService.getTotalProducts()
   }
 }

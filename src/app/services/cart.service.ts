@@ -6,7 +6,12 @@ import { Product } from '../interfaces/product';
 })
 export class CartService {
   cart:Product[] = [];
+  product!:Product
 
+  clearCart(){
+    this.cart = [];
+  }
+  
   addProduct(item: Product){
     this.cart.push(item);
   }
@@ -21,5 +26,10 @@ export class CartService {
 
   deleteProduct(item:Product){
     this.cart = this.cart.filter(product=>product.id !== item?.id)
+  }
+
+  getTotalCartPrice(){
+   const cartPrices = this.cart.map(product=>product.price)
+   return cartPrices.reduce((previousPrice,currentPrice)=> previousPrice + currentPrice,0 );
   }
 }
