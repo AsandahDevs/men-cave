@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NonExistantComponent } from './non-existant.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 describe('NonExistantComponent', () => {
   let component: NonExistantComponent;
@@ -10,7 +11,7 @@ describe('NonExistantComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ NonExistantComponent ],
-      imports:[RouterTestingModule]
+      imports:[RouterTestingModule,ComponentsModule]
     })
     .compileComponents();
 
