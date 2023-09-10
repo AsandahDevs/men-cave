@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NonExistantRoutingModule } from './non-existant-routing.module';
 import { NonExistantComponent } from './non-existant.component';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { NonExistantComponent } from './non-existant.component';
   ],
   imports: [
     CommonModule,
-    NonExistantRoutingModule
+    NonExistantRoutingModule,
+    ComponentsModule
   ]
 })
 export class NonExistantModule { }

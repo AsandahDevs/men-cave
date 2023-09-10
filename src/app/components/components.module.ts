@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button/button.component';
 import { ProductComponent } from './product/product.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     ButtonComponent,
     ProductComponent,
     SpinnerComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     ButtonComponent,
     ProductComponent,
     SpinnerComponent,
+    FooterComponent
   ]
 })
 export class ComponentsModule { }
