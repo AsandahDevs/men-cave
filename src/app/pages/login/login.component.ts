@@ -102,7 +102,9 @@ export class LoginComponent implements OnInit {
       loginButton.innerHTML = `<span>Logging in as ${userEmail}...</span>`;
       userSession.then((response) => {
         this.router.navigateByUrl('/home');
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        },1500)
       }, (error) => {
           loginButton.innerHTML = "login"
           message.innerHTML = `<p class='text-white'>${error.message} !</p>`;
