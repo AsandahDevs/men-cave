@@ -1,4 +1,4 @@
-<h2 class="d-flex justify-content-center mt-2" *ngIf="totalCartProducts() === 0">Cart is empty !</h2>
+<h2 class="d-flex justify-content-center mt-2 text-white" *ngIf="totalCartProducts() === 0">Cart is empty !</h2>
 <div *ngFor="let item of displayCartItems(),let i=index" class="card mb-3 mt-2">
     <div class="row g-0">
       <div class="col-md-4">
@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <h3 class="mx-2">Total: {{totalCartPrice() | currency: 'ZAR '}}</h3>
+  <h3 class="mx-2 text-white">Total: {{totalCartPrice() | currency: 'ZAR '}}</h3>
   <button  type="button" class="btn btn-danger mt-1 mx-2" (click)="emptyCartItems()">Empty cart <i class="fas fa-trash-alt"></i></button>
   <br />
   <app-footer></app-footer>

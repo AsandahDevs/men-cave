@@ -5,3 +5,32 @@
 @import '@fortawesome/fontawesome-free/scss/brands.scss';
 
 @import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+html{
+    height: 100%;
+}
+
+body{
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #1e1b1a, #afa4a8, #4e5354, #111817);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

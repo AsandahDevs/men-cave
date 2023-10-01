@@ -1,0 +1,76 @@
+<mdb-tabs [pills]="true" [fill]="true">
+  <!--Login tab-->
+    <mdb-tab title="Login">
+      <form novalidate [formGroup]="loginForm">
+        <!-- Email input -->
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="email" id="loginEmail" class="form-control text-white" name="email" formControlName="email"/>
+          <label mdbLabel class="form-label text-white" for="loginEmail">Email</label>
+          <mdb-error *ngIf="email?.invalid && email?.dirty">A valid email is required !</mdb-error>
+        </mdb-form-control>
+  
+  
+        <!-- Password input -->
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="password" id="loginPassword" class="form-control text-white" name="password" formControlName="password" />
+          <label mdbLabel class="form-label text-white" for="loginPassword">Password</label>
+          <mdb-error *ngIf="password?.invalid && password?.dirty">A valid password is required !</mdb-error>
+        </mdb-form-control>
+  
+        <!-- Submit button -->
+        <button mdbRipple type="submit" class="btn btn-dark btn-block mb-4" id="login" (click)="login($event)" [disabled]="!loginForm.valid">
+          Login
+        </button>
+        <p id="loginFeedback"></p>
+      </form>
+    </mdb-tab>
+
+    <mdb-tab id="registrationTab" title="Register">
+      <form novalidate [formGroup]="registrationForm">
+  
+        <!-- Name input -->
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="text" id="registerName" class="form-control text-white" name="fullNames" formControlName="fullNames"/>
+          <label mdbLabel class="form-label text-white" for="registerName">Full names</label>
+          <mdb-error *ngIf="fullNames?.invalid && fullNames?.dirty">Enter a valid full name(s) !</mdb-error>
+        </mdb-form-control>
+  
+        <!-- Email input -->
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="email" id="registerEmail" class="form-control text-white" name="email" formControlName="email"/>
+          <label mdbLabel class="form-label text-white" for="registerEmail">Email</label>
+          <mdb-error *ngIf="email?.invalid && email?.dirty ">A valid email is required !</mdb-error>
+        </mdb-form-control>
+  
+        <!-- Password input -->
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="password" id="registerPassword" class="form-control text-white" name="password" formControlName="password"/>
+          <label mdbLabel class="form-label text-white" for="registerPassword">Password</label>
+          <mdb-error *ngIf="password?.invalid && password?.dirty">A valid password is required !</mdb-error>
+        </mdb-form-control>
+  
+        <!-- Repeat Password input -->
+        <mdb-form-control class="mb-4">
+          <input
+            mdbInput
+            type="password"
+            id="confirmPasswordRegistration"
+            class="form-control text-white"
+            name="confirmPassword"
+            formControlName="confirmPassword"
+            (input)="verifyPasswords()"
+          />
+          <label mdbLabel class="form-label text-white" for="registerRepeatPassword"
+            >Confirm password</label
+          >
+        </mdb-form-control>
+        <div id="feedback" [ngClass]="this.formStatus ? 'success':'error' "></div>
+  
+        <!-- Submit button -->
+        <button mdbRipple type="submit" class="btn btn-dark btn-block mb-3" id="createAccount" (click)="createNewAccount($event)" [disabled]="!registrationForm.valid">
+          Create a new account
+        </button>
+        <p id="registrationFeedback"></p>
+      </form>
+    </mdb-tab>
+</mdb-tabs>
