@@ -4,4 +4,18 @@ mdb-tabs{
     text-align: center; 
     top: 30%;
     width: 50%;
+   form.ng-invalid{
+    cursor: not-allowed;
+  }
+  .error {
+      color: red;
+    }
+  .success {
+      color: greenyellow;
+  }
+  #feedback{
+      position: absolute;
+      top: 80%;
+      left: 0%;
+    }
 }
