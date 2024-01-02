@@ -6,8 +6,10 @@ RUN mkdir -p /src/app
 
 WORKDIR /app
 
-ADD package*.json /app/
+ADD package*.json /app
 
 COPY . .
 
 RUN npm install
+
+EXPOSE 4200

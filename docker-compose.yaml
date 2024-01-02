@@ -1,10 +1,11 @@
 version: "3.8"
 services:
-  men_cave:
+  front_end:
+    container_name: men_cave
     build:
       context: .
-      dockerfile: dockerfile
-    command: ng serve
+      dockerfile: Dockerfile
+    command: npm start
     ports:
       - 4200:4200
     volumes:
