@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  men_cave:
+    build:
+      context: .
+      dockerfile: dockerfile
+    command: ng serve
+    ports:
+      - 4200:4200
+    volumes:
+      - .:/app  

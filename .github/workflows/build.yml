@@ -24,3 +24,14 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  publish_docker_image:
+    name: Docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build image
+        run: docker build -t asandah/mencave:1.0
+      - name: Push image 
+        run: |
+          docker login -u asandah -p ${{secrets.DOCKER_HUB_TOKEN}} 
+          docker push asandah/mencave:1.0 
