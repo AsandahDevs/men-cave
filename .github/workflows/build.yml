@@ -27,6 +27,7 @@ jobs:
   publish_docker_image:
     name: Docker
     runs-on: ubuntu-latest
+    needs: sonarcloud
     steps:
       - uses: actions/checkout@v3
       - name: Build image
