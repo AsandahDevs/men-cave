@@ -7,7 +7,7 @@ module.exports = function(config) {
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     browsers: ['ChromeHeadlessNoSandbox', 'Firefox','Chrome'], // IMPORTANT! You can list & use multiple browsers
     customLaunchers: {
-        ChromeHeadlessCI: {
+      ChromeHeadlessNoSandbox: {
           base: 'ChromeHeadless',
           flags: ['--no-sandbox']
         }
