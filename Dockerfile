@@ -8,6 +8,8 @@ WORKDIR /app
 
 ADD package*.json /app
 
+COPY mdb-angular-ui-kit-4.1.0.tgz /app
+
 RUN npm install
 
 COPY . .
