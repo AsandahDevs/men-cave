@@ -1,11 +1,11 @@
 // karma.conf.js
-process.env.CHROME_BIN = require('puppeteer').executablePath() // IMPORTANT!
+process.env.CHROME_BIN = '/usr/bin/chromium'
 
 module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
-    browsers: ['ChromeHeadlessNoSandbox', 'Firefox','Chrome'], // IMPORTANT! You can list & use multiple browsers
+    browsers: ['ChromeHeadlessNoSandbox', 'Firefox','Chrome','ChromeHeadless'], // IMPORTANT! You can list & use multiple browsers
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
           base: 'ChromeHeadless',
