@@ -1,5 +1,5 @@
 // karma.conf.js
-process.env.CHROME_BIN = '/usr/bin/chromium'
+process.env.CHROME_BIN = '/usr/bin/chromium-browser'
 
 module.exports = function(config) {
   config.set({
