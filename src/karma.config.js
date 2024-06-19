@@ -1,15 +1,15 @@
 // karma.conf.js
-process.env.CHROME_BIN = '/usr/bin/chromium-browser'
+process.env.CHROME_BIN = '/usr/bin/chromium-browser';
 
 module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
-    browsers: ['ChromeHeadlessNoSandbox', 'Firefox','Chrome','ChromeHeadless'], // IMPORTANT! You can list & use multiple browsers
+    browsers: ['ChromeHeadlessNoSandbox','Chrome','ChromeHeadless'], // IMPORTANT! You can list & use multiple browsers
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
           base: 'ChromeHeadless',
-          flags: ['--no-sandbox']
+          flags: ['--no-sandbox','--disable-gpu','--headless']
         }
       },
     plugins: [
