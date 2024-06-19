@@ -15,6 +15,9 @@ RUN apk upgrade --no-cache --available \
 # Set the CHROME_BIN environment variable to the Chromium binary
 ENV CHROME_BIN=/usr/bin/chromium-browser
 
+# Verify the CHROME_BIN environment variable
+RUN echo "CHROME_BIN is set to: ${CHROME_BIN}"
+
 RUN mkdir -p /src/app 
 
 WORKDIR /app
