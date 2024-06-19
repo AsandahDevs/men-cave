@@ -1,18 +1,17 @@
 version: "3.8"
 services:
-  # front_end:
-  #   container_name: men_cave
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   command: npm start 
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=true
-  #   ports:
-  #     - 4200:4200
-  #   volumes:
-  #     - .:/app 
-  #     - /app/node_modules
+  men-cave-frontend-application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm start 
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - 4200:4200
+    volumes:
+      - .:/app 
+      - /app/node_modules
 
   men-cave-test-coverage:
     build: .
