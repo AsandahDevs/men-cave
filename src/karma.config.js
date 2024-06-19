@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
-    browsers: ['ChromeHeadless', 'Firefox','Chrome'], // IMPORTANT! You can list & use multiple browsers
+    browsers: ['ChromeHeadlessNoSandbox', 'Firefox','Chrome'], // IMPORTANT! You can list & use multiple browsers
     customLaunchers: {
         ChromeHeadlessCI: {
           base: 'ChromeHeadless',
@@ -27,7 +27,7 @@ module.exports = function(config) {
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, '../coverage/men-cave'),
-      reports: ['html', 'lcovonly'],
+      reports: ['html', 'lcovonly','text-summary'],
       fixWebpackSourcePaths: true
     },
     reporters: ['progress', 'kjhtml','coverage-istanbul'],
@@ -35,6 +35,7 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
+    singleRun: false,
     restartOnFileChange: true
   })
 }
