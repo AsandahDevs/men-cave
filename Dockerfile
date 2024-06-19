@@ -2,6 +2,19 @@ ARG NODE_VERSION=16.15.1-alpine3.15
 
 FROM node:${NODE_VERSION}
 
+# Installs latest Chromium package.
+RUN apk upgrade --no-cache --available \
+    && apk add --no-cache \
+      chromium-swiftshader \
+      ttf-freefont \
+      font-noto-emoji \
+    && apk add --no-cache \
+      --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community \
+      font-wqy-zenhei
+
+# Set the CHROME_BIN environment variable to the Chromium binary
+ENV CHROME_BIN=/usr/bin/chromium-browser
+
 RUN mkdir -p /src/app 
 
 WORKDIR /app
