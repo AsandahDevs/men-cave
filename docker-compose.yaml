@@ -13,8 +13,8 @@ services:
       - .:/app 
       - /app/node_modules
 
-  men-cave-test-coverage:
-    build: .
-    command: npm run test-headless
-    volumes:
-      - .:/app
+  # men-cave-test-coverage:
+  #   build: .
+  #   command: npm run test-coverage
+  #   volumes:
+  #     - .:/app
