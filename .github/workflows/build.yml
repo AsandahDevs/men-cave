@@ -1,0 +1,38 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Install dependencies
+        run: npm install
+      - name: Install puppeteer and karma-chrome-launcher
+        run: npm i -D puppeteer karma-chrome-launcher
+      - name: Test and coverage
+        run:  npm run test-coverage
+      # - name: SonarCloud Scan
+      #   uses: SonarSource/sonarcloud-github-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  publish_docker_image:
+    name: Docker
+    runs-on: ubuntu-latest
+    needs: sonarcloud
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build image
+        run: docker build -t asandah/mencave:1.0 .
+      - name: Push image 
+        run: |
+          docker login -u asandah -p ${{secrets.DOCKER_HUB_TOKEN}} 
+          docker push asandah/mencave:1.0 
