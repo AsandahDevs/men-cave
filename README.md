@@ -12,6 +12,9 @@ An e-commerce site that caters for men of relevance ,whether you're in a field o
 ## Disclaimer
 This site uses the <a href="https://fakestoreapi.com/" target="_blank">fakestoreapi</a> to generate images of products.
 
+## Deployment
+run `npm run deploy` to deploy to github pages 
+
 MIT License
 
 Copyright (c) 2023 Asanda Majola
