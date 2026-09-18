@@ -10,8 +10,8 @@
       [categories]="categories"
       [selectedCategory]="selectedCategory"
       [searchTerm]="searchTerm"
-      (selectedCategoryChange)="selectedCategory = $event"
-      (searchTermChange)="searchTerm = $event"
+      (selectedCategoryChange)="setCategory($event)"
+      (searchTermChange)="setSearchTerm($event)"
     ></app-product-filters>
 
     <div class="catalogue-summary" aria-live="polite">
@@ -23,17 +23,35 @@
 
     <div *ngIf="!loading && filteredProducts.length" class="product-grid">
       <app-product
-        *ngFor="let product of filteredProducts"
+        *ngFor="let product of paginatedProducts"
         (clickedProduct)="addToCart($event)"
         [product]="product"
       ></app-product>
     </div>
 
+    <nav *ngIf="!loading && totalPages > 1" class="pagination" aria-label="Product pages">
+      <button type="button" (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1" aria-label="Previous page">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i><span>Previous</span>
+      </button>
+      <div class="page-numbers">
+        <button
+          *ngFor="let page of pageNumbers"
+          type="button"
+          [class.is-current]="currentPage === page"
+          [attr.aria-current]="currentPage === page ? 'page' : null"
+          (click)="setPage(page)"
+        >{{ page }}</button>
+      </div>
+      <button type="button" (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages" aria-label="Next page">
+        <span>Next</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </button>
+    </nav>
+
     <div *ngIf="!loading && !filteredProducts.length" class="empty-state">
       <i class="fas fa-search" aria-hidden="true"></i>
       <h2>No matches found</h2>
       <p>Try another search or choose a different category.</p>
-      <button type="button" (click)="searchTerm = ''; selectedCategory = 'All products'">Clear filters</button>
+      <button type="button" (click)="setSearchTerm(''); setCategory('All products')">Clear filters</button>
     </div>
   </section>
 </main>

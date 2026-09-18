@@ -15,6 +15,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   categories: string[] = [];
   selectedCategory = 'All products';
   searchTerm = '';
+  currentPage = 1;
+  readonly pageSize = 6;
   private subscriptions = new Subscription();
   loading = false;
   message = '';
@@ -52,6 +54,33 @@ export class ProductsComponent implements OnInit, OnDestroy {
       const searchableText = `${product.title} ${product.description} ${product.category}`.toLocaleLowerCase();
       return matchesCategory && (!search || searchableText.includes(search));
     });
+  }
+
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.filteredProducts.length / this.pageSize));
+  }
+
+  get paginatedProducts(): Product[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredProducts.slice(start, start + this.pageSize);
+  }
+
+  get pageNumbers(): number[] {
+    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+  }
+
+  setSearchTerm(searchTerm: string): void {
+    this.searchTerm = searchTerm;
+    this.currentPage = 1;
+  }
+
+  setCategory(category: string): void {
+    this.selectedCategory = category;
+    this.currentPage = 1;
+  }
+
+  setPage(page: number): void {
+    this.currentPage = Math.min(Math.max(page, 1), this.totalPages);
   }
 
   addToCart(item:Product){

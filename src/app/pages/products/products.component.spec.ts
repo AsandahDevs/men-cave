@@ -120,6 +120,14 @@ describe('ProductsComponent', () => {
     expect(component.filteredProducts).toEqual([component.products[0]]);
   });
 
+  it('should reset pagination when filters change', () => {
+    component.currentPage = 2;
+
+    component.setSearchTerm('jacket');
+
+    expect(component.currentPage).toBe(1);
+  });
+
   it('should unsubscribe from active subscriptions on component destruction', () => {
     spyOn((component as any).subscriptions, 'unsubscribe');
 
