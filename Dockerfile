@@ -1,19 +1,25 @@
-ARG NODE_VERSION=16.15.1
+ARG NODE_VERSION=20.18.1
 
-FROM node:${NODE_VERSION}
+FROM node:${NODE_VERSION}-bookworm-slim
 
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+# Puppeteer 22 requires Node.js 18 or newer. Use Debian's Chromium package
+# rather than a deprecated external Chrome repository.
+ENV PUPPETEER_SKIP_DOWNLOAD=true \
+    CHROME_BIN=/usr/bin/chromium
 
-RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
-    
-RUN apt-get update && apt-get install -y google-chrome-stable xvfb
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends chromium \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY package*.json /app
+# Copy the lockfile first so the dependency layer remains cacheable. `npm ci`
+# makes container installs deterministic and fails if it drifts from the lock.
+COPY package.json package-lock.json ./
+RUN npm ci
 
-COPY mdb-angular-ui-kit-4.1.0.tgz /app
+COPY . ./
 
-RUN npm install
+EXPOSE 4200
 
-COPY . .
+CMD ["npm", "start"]
