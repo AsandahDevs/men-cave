@@ -12,12 +12,17 @@ interface StrapiProduct {
   name: string;
   price: number;
   description: string;
+  sale?: boolean;
   image?: StrapiMedia[];
   categories?: Array<{ name: string }>;
 }
 
 interface StrapiProductListResponse {
   data: StrapiProduct[];
+}
+
+interface StrapiCategoryListResponse {
+  data: Array<{ name: string }>;
 }
 
 @Injectable({
@@ -33,14 +38,26 @@ export class ProductsDataService  {
       .pipe(map(({ data }) => data.map((product) => this.toProduct(product))));
   }
 
+  getCategories(): Observable<string[]> {
+    return this.http
+      .get<StrapiCategoryListResponse>('/api/categories?sort=name')
+      .pipe(map(({ data }) => data.map((category) => category.name)));
+  }
+
   private toProduct(product: StrapiProduct): Product {
     return {
       id: product.id,
-      title: product.name,
+      title: this.toSentenceCase(product.name),
       price: product.price,
       description: product.description,
       category: product.categories?.[0]?.name ?? '',
       image: product.image?.[0]?.url ?? '',
+      sale: product.sale ?? false,
     };
+  }
+
+  private toSentenceCase(value: string): string {
+    const normalized = value.trim().toLocaleLowerCase();
+    return normalized ? normalized[0].toLocaleUpperCase() + normalized.slice(1) : normalized;
   }
 }
