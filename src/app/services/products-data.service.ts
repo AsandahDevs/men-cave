@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Product } from '../interfaces/product';
 
@@ -19,10 +19,24 @@ interface StrapiProduct {
 
 interface StrapiProductListResponse {
   data: StrapiProduct[];
+  meta: {
+    pagination: {
+      page: number;
+      pageCount: number;
+      total: number;
+    };
+  };
 }
 
 interface StrapiCategoryListResponse {
   data: Array<{ name: string }>;
+}
+
+export interface ProductPage {
+  products: Product[];
+  page: number;
+  pageCount: number;
+  total: number;
 }
 
 @Injectable({
@@ -32,10 +46,28 @@ export class ProductsDataService  {
 
   constructor( private http: HttpClient) { }
 
-  getProducts(): Observable<Product[]> {
+  getProducts(page: number, pageSize: number, searchTerm = '', category = 'All products'): Observable<ProductPage> {
+    let params = new HttpParams()
+      .set('populate', 'image,categories')
+      .set('pagination[page]', page)
+      .set('pagination[pageSize]', pageSize);
+
+    if (searchTerm.trim()) {
+      params = params.set('filters[name][$containsi]', searchTerm.trim());
+    }
+
+    if (category !== 'All products') {
+      params = params.set('filters[categories][name][$eq]', category);
+    }
+
     return this.http
-      .get<StrapiProductListResponse>('/api/products?populate=image,categories')
-      .pipe(map(({ data }) => data.map((product) => this.toProduct(product))));
+      .get<StrapiProductListResponse>('/api/products', { params })
+      .pipe(map(({ data, meta }) => ({
+        products: data.map((product) => this.toProduct(product)),
+        page: meta.pagination.page,
+        pageCount: meta.pagination.pageCount,
+        total: meta.pagination.total,
+      })));
   }
 
   getCategories(): Observable<string[]> {

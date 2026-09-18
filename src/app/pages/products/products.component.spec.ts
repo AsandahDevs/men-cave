@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductsComponent } from './products.component';
-import { ProductsDataService } from 'src/app/services/products-data.service';
+import { ProductPage, ProductsDataService } from 'src/app/services/products-data.service';
 import { of } from 'rxjs';
 import { Product } from 'src/app/interfaces/product';
 import { ComponentsModule } from 'src/app/components/components.module';
@@ -23,7 +23,7 @@ describe('ProductsComponent', () => {
 
     fixture = TestBed.createComponent(ProductsComponent);
     productService = TestBed.inject(ProductsDataService) as jasmine.SpyObj<ProductsDataService>;
-    productService.getProducts.and.returnValue(of([]));
+    productService.getProducts.and.returnValue(of({ products: [], page: 1, pageCount: 1, total: 0 }));
     productService.getCategories.and.returnValue(of([]));
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -89,7 +89,8 @@ describe('ProductsComponent', () => {
         },
       },
     ];
-    productService.getProducts.and.returnValue(of(mockProducts));
+    const response: ProductPage = { products: mockProducts, page: 1, pageCount: 1, total: mockProducts.length };
+    productService.getProducts.and.returnValue(of(response));
     productService.getCategories.and.returnValue(of(["men's clothing"]));
 
     component.ngOnInit();
@@ -97,30 +98,7 @@ describe('ProductsComponent', () => {
     expect(productService.getProducts).toHaveBeenCalled();
   });
 
-  it('should filter products by search term and category', () => {
-    component.products = [{
-      id: 1,
-      title: 'Black leather jacket',
-      price: 105.99,
-      description: 'A classic jacket',
-      category: 'jackets',
-      image: '/uploads/jacket.jpg',
-    }, {
-      id: 2,
-      title: 'Leather shoes',
-      price: 899.99,
-      description: 'Formal shoes',
-      category: 'footwear',
-      image: '/uploads/shoes.jpg',
-    }];
-
-    component.selectedCategory = 'jackets';
-    component.searchTerm = 'leather';
-
-    expect(component.filteredProducts).toEqual([component.products[0]]);
-  });
-
-  it('should reset pagination when filters change', () => {
+  it('should reset pagination and queue a server search when filters change', () => {
     component.currentPage = 2;
 
     component.setSearchTerm('jacket');

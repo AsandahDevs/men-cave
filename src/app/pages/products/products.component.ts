@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
 import { Product } from 'src/app/interfaces/product';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -17,52 +17,27 @@ export class ProductsComponent implements OnInit, OnDestroy {
   searchTerm = '';
   currentPage = 1;
   readonly pageSize = 6;
+  totalProducts = 0;
+  totalPages = 1;
   private subscriptions = new Subscription();
+  private searchTerms = new Subject<string>();
+  private productRequest?: Subscription;
   loading = false;
   message = '';
   constructor(private productService: ProductsDataService, public cartService:CartService) {}
 
   ngOnInit() {
-    this.loading = true;
-    this.message = 'Loading...';
-    this.subscriptions.add(this.productService
-      .getProducts()
-      .subscribe({
-        next: (data:any) => {
-          this.loading = false;
-          this.products = data
-        },
-        error: (error: any) => {
-          this.loading = false;
-          this.message = 'Unable to load products.';
-          console.log(error);
-        },
-      }));
+    this.subscriptions.add(this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+    ).subscribe(() => this.loadProducts()));
+
+    this.loadProducts();
 
     this.subscriptions.add(this.productService.getCategories().subscribe({
       next: (categories) => this.categories = categories,
       error: (error) => console.log(error),
     }));
-  }
-
-  get filteredProducts(): Product[] {
-    const search = this.searchTerm.trim().toLocaleLowerCase();
-
-    return this.products.filter((product) => {
-      const matchesCategory = this.selectedCategory === 'All products'
-        || product.category === this.selectedCategory;
-      const searchableText = `${product.title} ${product.description} ${product.category}`.toLocaleLowerCase();
-      return matchesCategory && (!search || searchableText.includes(search));
-    });
-  }
-
-  get totalPages(): number {
-    return Math.max(1, Math.ceil(this.filteredProducts.length / this.pageSize));
-  }
-
-  get paginatedProducts(): Product[] {
-    const start = (this.currentPage - 1) * this.pageSize;
-    return this.filteredProducts.slice(start, start + this.pageSize);
   }
 
   get pageNumbers(): number[] {
@@ -72,15 +47,45 @@ export class ProductsComponent implements OnInit, OnDestroy {
   setSearchTerm(searchTerm: string): void {
     this.searchTerm = searchTerm;
     this.currentPage = 1;
+    this.searchTerms.next(searchTerm);
   }
 
   setCategory(category: string): void {
     this.selectedCategory = category;
     this.currentPage = 1;
+    this.loadProducts();
   }
 
   setPage(page: number): void {
-    this.currentPage = Math.min(Math.max(page, 1), this.totalPages);
+    const nextPage = Math.min(Math.max(page, 1), this.totalPages);
+    if (nextPage === this.currentPage) return;
+    this.currentPage = nextPage;
+    this.loadProducts();
+  }
+
+  private loadProducts(): void {
+    this.productRequest?.unsubscribe();
+    this.loading = true;
+    this.message = 'Loading products...';
+    this.productRequest = this.productService
+      .getProducts(this.currentPage, this.pageSize, this.searchTerm, this.selectedCategory)
+      .subscribe({
+        next: (result) => {
+          this.products = result.products;
+          this.totalProducts = result.total;
+          this.totalPages = Math.max(1, result.pageCount);
+          this.currentPage = result.page;
+          this.loading = false;
+        },
+        error: (error) => {
+          this.products = [];
+          this.totalProducts = 0;
+          this.totalPages = 1;
+          this.loading = false;
+          this.message = 'Unable to load products.';
+          console.log(error);
+        },
+      });
   }
 
   addToCart(item:Product){
@@ -89,6 +94,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+    this.productRequest?.unsubscribe();
   }
 
 }

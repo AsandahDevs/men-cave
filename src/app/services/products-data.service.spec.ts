@@ -50,21 +50,26 @@ describe('ProductsDataService', () => {
       sale: true,
     }];
 
-    service.getProducts().subscribe((products: any) => {
-      expect(products).toEqual(expectedProducts);
+    service.getProducts(1, 6).subscribe((result) => {
+      expect(result.products).toEqual(expectedProducts);
+      expect(result.total).toBe(1);
     });
 
-    const req = httpMock.expectOne('/api/products?populate=image,categories');
+    const req = httpMock.expectOne((request) => request.url === '/api/products');
     expect(req.request.method).toBe('GET');
-    req.flush(strapiResponse);
+    expect(req.request.params.get('populate')).toBe('image,categories');
+    expect(req.request.params.get('pagination[page]')).toBe('1');
+    expect(req.request.params.get('pagination[pageSize]')).toBe('6');
+    req.flush({ ...strapiResponse, meta: { pagination: { page: 1, pageCount: 1, total: 1 } } });
   });
 
   it('should request product images and categories', () => {
 
-    service.getProducts().subscribe();
+    service.getProducts(1, 6, 'jacket', 'jackets').subscribe();
 
-    const req = httpMock.expectOne('/api/products?populate=image,categories');
-    expect(req.request.urlWithParams).toBe('/api/products?populate=image,categories');
-    req.flush({ data: [] });
+    const req = httpMock.expectOne((request) => request.url === '/api/products');
+    expect(req.request.params.get('filters[name][$containsi]')).toBe('jacket');
+    expect(req.request.params.get('filters[categories][name][$eq]')).toBe('jackets');
+    req.flush({ data: [], meta: { pagination: { page: 1, pageCount: 1, total: 0 } } });
   });
 });
