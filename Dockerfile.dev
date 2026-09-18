@@ -1,6 +1,6 @@
 ARG NODE_VERSION=20.18.1
 
-FROM node:${NODE_VERSION}-bookworm-slim AS build
+FROM node:${NODE_VERSION}-bookworm-slim
 
 WORKDIR /app
 
@@ -10,8 +10,7 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . ./
-RUN npm run build:docker
 
-FROM scratch AS production-assets
+EXPOSE 4200
 
-COPY --from=build /app/dist /
+CMD ["npm", "start"]
