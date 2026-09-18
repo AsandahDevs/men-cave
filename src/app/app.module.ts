@@ -11,7 +11,6 @@ import { ProductsModule } from './pages/products/products.module';
 import { NonExistantModule } from './pages/non-existant/non-existant.module';
 import { ShoppingCartModule } from './pages/shopping-cart/shopping-cart.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { LoginModule } from './pages/login/login.module';
 
 
 @NgModule({
@@ -27,8 +26,7 @@ import { LoginModule } from './pages/login/login.module';
     ProductsModule,
     NonExistantModule,
     ShoppingCartModule,
-    HttpClientModule,
-    LoginModule
+    HttpClientModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent],
