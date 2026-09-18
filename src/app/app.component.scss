@@ -5,3 +5,54 @@
 .showNavBar{
     display: block;
 }
+
+.cart-nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.cart-link {
+    position: relative;
+    display: grid;
+    width: 2.6rem;
+    height: 2.6rem;
+    place-items: center;
+    color: #2a211b;
+    font-size: 1.15rem;
+    text-decoration: none;
+    background: #f5f0e9;
+    border: 1px solid #e5dbd0;
+    border-radius: 50%;
+    transition: transform .2s ease, background .2s ease, color .2s ease;
+
+    &:hover,
+    &:focus-visible {
+        color: #fff;
+        background: #2a211b;
+        transform: translateY(-2px);
+        outline: 0;
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 .22rem rgba(184, 138, 82, .32);
+    }
+}
+
+.cart-count {
+    position: absolute;
+    top: -.25rem;
+    right: -.38rem;
+    display: grid;
+    min-width: 1.22rem;
+    height: 1.22rem;
+    padding: 0 .24rem;
+    place-items: center;
+    color: #fff;
+    font-size: .67rem;
+    font-weight: 800;
+    line-height: 1;
+    background: #c62828;
+    border: 2px solid #f8f9fa;
+    border-radius: 999px;
+    box-shadow: 0 .15rem .4rem rgba(128, 26, 26, .28);
+}

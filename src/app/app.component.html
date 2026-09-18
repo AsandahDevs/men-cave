@@ -24,8 +24,16 @@
             <a class="nav-link" [routerLink]="['products']">Products</a>
           </li>
         </ul>
-        <span class="nav-item">
-          <a class="nav-link" [routerLink]="['shopping-cart']"><i class="fas fa-shopping-cart"><span class="badge badge-success">{{totalCartProducts()}}</span></i></a>
+        <span class="nav-item cart-nav-item">
+          <a
+            class="cart-link"
+            [routerLink]="['shopping-cart']"
+            [attr.aria-label]="totalCartProducts() + ' items in your shopping bag'"
+            title="Shopping bag"
+          >
+            <i class="fas fa-bag-shopping" aria-hidden="true"></i>
+            <span *ngIf="totalCartProducts()" class="cart-count">{{ totalCartProducts() }}</span>
+          </a>
         </span>
       </div>
     </div>

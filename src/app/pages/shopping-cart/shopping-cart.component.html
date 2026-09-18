@@ -1,26 +1,54 @@
-<h2 class="d-flex justify-content-center mt-2 text-white" *ngIf="totalCartProducts() === 0">Cart is empty !</h2>
-<div *ngFor="let item of displayCartItems(),let i=index" class="card mb-3 mt-2">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img
-          src={{item.image}}
-          alt={{item.title}}
-          class="img-fluid rounded-start"
-        />
-      </div>
-      <div class="col-md-8">
-        <i class="d-sm-none d-md-block fas fa-trash-alt" (click)="deleteItem(item)"></i>
-        <div class="card-body">
-          <h5 class="card-title">{{item.title}}</h5>
-          <p class="card-text">
-          {{item.description}}
-          </p>
-          <p>Price: {{item.price | currency:'ZAR '}}</p>
+<main class="cart-page">
+  <header class="cart-header">
+    <p class="eyebrow">Your selection</p>
+    <h1>Shopping bag</h1>
+    <p>{{ totalCartProducts() }} {{ totalCartProducts() === 1 ? 'item' : 'items' }} ready for checkout.</p>
+  </header>
+
+  <section *ngIf="totalCartProducts(); else emptyCart" class="cart-layout">
+    <div class="cart-items" aria-label="Items in your cart">
+      <article *ngFor="let item of displayCartItems(); trackBy: trackByProductId" class="cart-item">
+        <img *ngIf="item.image" [src]="item.image" [alt]="item.title" />
+        <div *ngIf="!item.image" class="image-placeholder"><i class="fas fa-shirt" aria-hidden="true"></i></div>
+
+        <div class="item-details">
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.description }}</p>
+          <button type="button" class="remove-button" (click)="deleteItem(item)">
+            <i class="fas fa-trash-alt" aria-hidden="true"></i> Remove
+          </button>
         </div>
-      </div>
+
+        <div class="item-actions">
+          <div class="quantity-control" [attr.aria-label]="'Quantity for ' + item.title">
+            <button type="button" (click)="decreaseQuantity(item)" aria-label="Decrease quantity">−</button>
+            <span>{{ item.quantity }}</span>
+            <button type="button" (click)="increaseQuantity(item)" aria-label="Increase quantity">+</button>
+          </div>
+          <strong>R{{ item.price * item.quantity | number:'1.2-2' }}</strong>
+          <span class="unit-price">R{{ item.price | number:'1.2-2' }} each</span>
+        </div>
+      </article>
     </div>
-  </div>
-  <h3 class="mx-2 text-white">Total: {{totalCartPrice() | currency: 'ZAR '}}</h3>
-  <button  type="button" class="btn btn-danger mt-1 mx-2" (click)="emptyCartItems()">Empty cart <i class="fas fa-trash-alt"></i></button>
-  <br />
-  <app-footer></app-footer>
+
+    <aside class="order-summary" aria-label="Order summary">
+      <h2>Order summary</h2>
+      <div><span>Subtotal</span><strong>R{{ totalCartPrice() | number:'1.2-2' }}</strong></div>
+      <div><span>Delivery</span><span class="free-delivery">Free</span></div>
+      <div class="summary-total"><span>Total</span><strong>R{{ totalCartPrice() | number:'1.2-2' }}</strong></div>
+      <button type="button" class="checkout-button">Secure checkout <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+      <button type="button" class="clear-button" (click)="emptyCartItems()">Clear bag</button>
+      <p class="payment-note"><i class="fas fa-lock" aria-hidden="true"></i> Secure payment at checkout</p>
+    </aside>
+  </section>
+
+  <ng-template #emptyCart>
+    <section class="empty-cart">
+      <div class="empty-icon"><i class="fas fa-bag-shopping" aria-hidden="true"></i></div>
+      <h2>Your bag is empty</h2>
+      <p>Find something built for your everyday.</p>
+      <a routerLink="/products">Explore products <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+    </section>
+  </ng-template>
+</main>
+<app-footer></app-footer>
