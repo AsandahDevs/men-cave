@@ -5,10 +5,12 @@ services:
       dockerfile: Dockerfile.dev
     environment:
       - CHOKIDAR_USEPOLLING=true
-      - BACKEND_URL=http://localhost:1337
+      - BACKEND_URL=http://host.docker.internal:1337
       - STRAPI_API_TOKEN=960f1bcbcdf654cfdb98bb091194519ed031baee05dbc0a4222d5ddfd36c61f64891a5535b29ee7af664c4caebe31b9ce89a54e6cc1c6781217d5796b169bcdf59d457d34777d3355a22ffdddad0304d65b943267f579c2a365752ddf00cf8afadc23580c75f6124cedcb7948f1c3c72a4be9a032452bb149834189e06590e53
     ports:
       - 4200:4200
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - .:/app 
       - /app/node_modules

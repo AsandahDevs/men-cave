@@ -28,6 +28,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.products = data
         },
         error: (error: any) => {
+          this.loading = false;
+          this.message = 'Unable to load products.';
           console.log(error);
         },
       } );
@@ -38,7 +40,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.menswear$.unsubscribe()
+    this.menswear$?.unsubscribe()
   }
 
 }
