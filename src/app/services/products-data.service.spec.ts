@@ -50,7 +50,7 @@ describe('ProductsDataService', () => {
       sale: true,
     }];
 
-    service.getProducts(1, 6).subscribe((result) => {
+    service.getProducts(1, 8).subscribe((result) => {
       expect(result.products).toEqual(expectedProducts);
       expect(result.total).toBe(1);
     });
@@ -59,7 +59,7 @@ describe('ProductsDataService', () => {
     expect(req.request.method).toBe('GET');
     expect(req.request.params.get('populate')).toBe('image,categories');
     expect(req.request.params.get('pagination[page]')).toBe('1');
-    expect(req.request.params.get('pagination[pageSize]')).toBe('6');
+    expect(req.request.params.get('pagination[pageSize]')).toBe('8');
     req.flush({ ...strapiResponse, meta: { pagination: { page: 1, pageCount: 1, total: 1 } } });
   });
 

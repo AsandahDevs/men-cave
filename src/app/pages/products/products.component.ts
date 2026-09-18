@@ -16,7 +16,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   selectedCategory = 'All products';
   searchTerm = '';
   currentPage = 1;
-  readonly pageSize = 6;
+  readonly pageSize = 8;
   totalProducts = 0;
   totalPages = 1;
   private subscriptions = new Subscription();
