@@ -1,12 +1,58 @@
-<!-- The video -->
-<video id="myVideo" [autoplay]=true [loop]=true [muted]=true aria-describedby="strongman lifting">
-    <source src="/../assets/videos/Trey Mitchell _ Austrian Oak Log Press _ 2023 Arnold Strongman Classic.mp4" type="video/mp4">
-</video>
+<main class="home-page">
+  <section class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">{{ homePage?.brandTitle }}</p>
+      <h1>{{ homePage?.headline }}</h1>
+      <p class="hero-copy">{{ homePage?.description }}</p>
+      <div *ngIf="homePage?.ctaLabel && homePage?.ctaUrl" class="hero-actions">
+        <a [href]="homePage?.ctaUrl" class="primary-cta">{{ homePage?.ctaLabel }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <div class="hero-image" [class.is-empty]="!featuredContentMedia.length">
+      <img *ngIf="featuredContentMedia[0]" [src]="featuredContentMedia[0].url" [alt]="featuredContentMedia[0].alt" />
+      <div class="hero-image-overlay"></div>
+    </div>
+  </section>
 
-<!--some overlay text to add masculine quotes-->
-<div class="content">
-    <h1>Home of the brave</h1>
-    <p>Where men of relevence find contentment and peace fitting for the soul.</p>
+  <section *ngIf="homePage?.aboutDescription" class="content-section about-section" aria-labelledby="about-heading">
+    <h2 id="about-heading">{{ homePage?.aboutTitle }}</h2>
+    <p>{{ homePage?.aboutDescription }}</p>
+  </section>
 
-    <app-footer></app-footer>
-  </div>
+  <section class="featured-section" aria-labelledby="featured-heading">
+    <div class="section-heading">
+      <div>
+        <h2 id="featured-heading">{{ homePage?.featuredTitle }}</h2>
+        <p class="section-copy">{{ homePage?.featuredDescription }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="!loading && featuredContentMedia.length" class="featured-grid">
+      <article *ngFor="let image of featuredContentMedia; trackBy: trackByImageUrl" class="featured-card">
+        <img [src]="image.url" [alt]="image.alt" />
+        <div class="featured-card-body">
+          <h3>{{ image.alt }}</h3>
+        </div>
+      </article>
+    </div>
+
+  </section>
+
+  <section *ngIf="homePage?.contactDetails?.length" class="content-section contact-section" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">{{ homePage?.contactTitle }}</h2>
+    <p *ngFor="let detail of homePage?.contactDetails">{{ detail }}</p>
+  </section>
+
+  <section *ngIf="homePage?.announcementsTitle || homePage?.announcementsDescription || announcementMedia.length" class="announcements-section" aria-labelledby="announcements-heading">
+    <div class="section-heading">
+      <div>
+        <h2 id="announcements-heading">{{ homePage?.announcementsTitle }}</h2>
+        <p *ngIf="homePage?.announcementsDescription" class="section-copy">{{ homePage?.announcementsDescription }}</p>
+      </div>
+    </div>
+    <div *ngIf="announcementMedia.length" class="announcements-grid">
+      <img *ngFor="let image of announcementMedia; trackBy: trackByImageUrl" [src]="image.url" [alt]="image.alt" />
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>
