@@ -2,8 +2,7 @@ services:
   men-cave-frontend-application:
     build:
       context: .
-      dockerfile: Dockerfile
-    command: npm start
+      dockerfile: Dockerfile.dev
     environment:
       - CHOKIDAR_USEPOLLING=true
     ports:

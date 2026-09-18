@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --poll 2000",
     "build": "ng build --base-href /men-cave/",
+    "build:docker": "ng build --configuration production --base-href /",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test-coverage": "ng test --code-coverage --browsers ChromeHeadlessNoSandbox --watch=false",
