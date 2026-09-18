@@ -1,0 +1,33 @@
+<section class="product-filters" aria-label="Product filters">
+  <label class="search-box" for="product-search">
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <input
+      id="product-search"
+      type="search"
+      [value]="searchTerm"
+      (input)="updateSearch($event)"
+      placeholder="Search the collection"
+      autocomplete="off"
+    />
+  </label>
+
+  <div class="category-list" aria-label="Product categories">
+    <button
+      type="button"
+      class="category-chip"
+      [class.is-selected]="selectedCategory === 'All products'"
+      (click)="selectCategory('All products')"
+    >
+      All products
+    </button>
+    <button
+      *ngFor="let category of categories"
+      type="button"
+      class="category-chip"
+      [class.is-selected]="selectedCategory === category"
+      (click)="selectCategory(category)"
+    >
+      {{ category }}
+    </button>
+  </div>
+</section>

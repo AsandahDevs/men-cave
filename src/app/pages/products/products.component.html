@@ -1,10 +1,58 @@
-<app-spinner *ngIf="loading" [message]="message"></app-spinner>
-<div class="container-fluid productsWallpaper">
-    <div class="row">
-        <div *ngFor="let product of products, let i = index" class="col-md-4 mt-5 justify-content-center">
-            <app-product (clickedProduct)="addToCart($event)" [product]="product"></app-product>
-        </div>
+<main class="products-page">
+  <section class="products-hero">
+    <p class="eyebrow">The Men Cave collection</p>
+    <h1>Everyday essentials, <em>well chosen.</em></h1>
+    <p class="hero-copy">Browse practical pieces for a wardrobe that works as hard as you do.</p>
+  </section>
+
+  <section class="catalogue" aria-label="Products catalogue">
+    <app-product-filters
+      [categories]="categories"
+      [selectedCategory]="selectedCategory"
+      [searchTerm]="searchTerm"
+      (selectedCategoryChange)="setCategory($event)"
+      (searchTermChange)="setSearchTerm($event)"
+    ></app-product-filters>
+
+    <div class="catalogue-summary" aria-live="polite">
+      <span>{{ totalProducts }} {{ totalProducts === 1 ? 'item' : 'items' }}</span>
+      <span *ngIf="selectedCategory !== 'All products'">in {{ selectedCategory }}</span>
     </div>
-</div>
-<br/>
+
+    <app-spinner *ngIf="loading" [message]="message"></app-spinner>
+
+    <div *ngIf="!loading && products.length" class="product-grid">
+      <app-product
+        *ngFor="let product of products"
+        (clickedProduct)="addToCart($event)"
+        [product]="product"
+      ></app-product>
+    </div>
+
+    <nav *ngIf="!loading && totalPages > 1" class="pagination" aria-label="Product pages">
+      <button type="button" (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1" aria-label="Previous page">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i><span>Previous</span>
+      </button>
+      <div class="page-numbers">
+        <button
+          *ngFor="let page of pageNumbers"
+          type="button"
+          [class.is-current]="currentPage === page"
+          [attr.aria-current]="currentPage === page ? 'page' : null"
+          (click)="setPage(page)"
+        >{{ page }}</button>
+      </div>
+      <button type="button" (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages" aria-label="Next page">
+        <span>Next</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </button>
+    </nav>
+
+    <div *ngIf="!loading && !products.length" class="empty-state">
+      <i class="fas fa-search" aria-hidden="true"></i>
+      <h2>No matches found</h2>
+      <p>Try another search or choose a different category.</p>
+      <button type="button" (click)="setSearchTerm(''); setCategory('All products')">Clear filters</button>
+    </div>
+  </section>
+</main>
 <app-footer></app-footer>

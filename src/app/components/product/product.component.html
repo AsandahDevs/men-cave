@@ -1,8 +1,15 @@
-<div class="card">
-    <img [src]="product.image" class="card-img-top" [alt]="product.title"/>
-    <div class="card-body">
-      <h5 class="card-title">{{product.title}}</h5>
-      <p class="card-text d-block">{{product.price | currency:'ZAR '}}</p>
-      <a class="btn btn-dark" (click)="addToCart(product)">Add to cart</a>
+<article class="product-card">
+  <div class="product-image-wrap">
+    <img *ngIf="product.image; else imagePlaceholder" [src]="product.image" [alt]="product.title" />
+    <ng-template #imagePlaceholder><i class="fas fa-shirt image-placeholder" aria-hidden="true"></i></ng-template>
+    <span *ngIf="product.sale" class="sale-chip">Sale</span>
+  </div>
+  <div class="product-card-body">
+    <h2>{{ product.title }}</h2>
+    <p class="product-description">{{ product.description }}</p>
+    <div class="product-card-footer">
+      <strong>R{{ product.price | number:'1.2-2' }}</strong>
+      <button type="button" (click)="addToCart(product)">Add <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
     </div>
-</div>
+  </div>
+</article>

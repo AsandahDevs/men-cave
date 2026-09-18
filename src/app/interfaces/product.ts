@@ -6,5 +6,6 @@ export interface Product {
     category:string,
     description: string,
     image:string,
+    sale?: boolean,
     rating?:Rating
 }

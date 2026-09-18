@@ -1,26 +1,30 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductsComponent } from './products.component';
-import { ProductsDataService } from 'src/app/services/products-data.service';
-import { HttpClientModule } from '@angular/common/http';
-import { of } from 'rxjs/internal/observable/of';
+import { ProductPage, ProductsDataService } from 'src/app/services/products-data.service';
+import { of } from 'rxjs';
 import { Product } from 'src/app/interfaces/product';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
   let fixture: ComponentFixture<ProductsComponent>;
-  let productService: ProductsDataService;
+  let productService: jasmine.SpyObj<ProductsDataService>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductsComponent],
-      providers: [ProductsDataService],
-      imports: [HttpClientModule,ComponentsModule],
+      providers: [{
+        provide: ProductsDataService,
+        useValue: jasmine.createSpyObj('ProductsDataService', ['getProducts', 'getCategories']),
+      }],
+      imports: [ComponentsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductsComponent);
-    productService = TestBed.inject(ProductsDataService);
+    productService = TestBed.inject(ProductsDataService) as jasmine.SpyObj<ProductsDataService>;
+    productService.getProducts.and.returnValue(of({ products: [], page: 1, pageCount: 1, total: 0 }));
+    productService.getCategories.and.returnValue(of([]));
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -85,18 +89,28 @@ describe('ProductsComponent', () => {
         },
       },
     ];
-    spyOn(productService, 'getProducts').and.returnValue(of(mockProducts));
+    const response: ProductPage = { products: mockProducts, page: 1, pageCount: 1, total: mockProducts.length };
+    productService.getProducts.and.returnValue(of(response));
+    productService.getCategories.and.returnValue(of(["men's clothing"]));
 
     component.ngOnInit();
 
     expect(productService.getProducts).toHaveBeenCalled();
   });
 
-  it('should unsubscribe from the subscription on component destruction', () => {
-    spyOn(component.menswear$, 'unsubscribe');
+  it('should reset pagination and queue a server search when filters change', () => {
+    component.currentPage = 2;
+
+    component.setSearchTerm('jacket');
+
+    expect(component.currentPage).toBe(1);
+  });
+
+  it('should unsubscribe from active subscriptions on component destruction', () => {
+    spyOn((component as any).subscriptions, 'unsubscribe');
 
     component.ngOnDestroy();
 
-    expect(component.menswear$.unsubscribe).toHaveBeenCalled();
+    expect((component as any).subscriptions.unsubscribe).toHaveBeenCalled();
   });
 });

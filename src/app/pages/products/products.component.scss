@@ -1,8 +1,105 @@
-.productsWallpaper{
-    background-image: url('/../assets/images/jens-lindner.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:center;
-    background-attachment: fixed;
-     min-height: 100vh;
+.products-page {
+  min-height: 100vh;
+  color: #2a211b;
+  background: #f8f6f2;
+}
+
+.products-hero {
+  min-height: 20rem;
+  padding: 4.5rem max(1.5rem, calc((100vw - 72rem) / 2));
+  color: #fff;
+  background: linear-gradient(90deg, rgba(22, 16, 12, .92), rgba(22, 16, 12, .43)), url('/assets/images/jens-lindner.jpg') center 38% / cover;
+
+  h1 {
+    max-width: 42rem;
+    margin: .3rem 0 1rem;
+    font-family: Georgia, serif;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 1.04;
+
+    em { color: #e6bd80; }
+  }
+}
+
+.eyebrow {
+  margin: 0;
+  color: #e6bd80;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.hero-copy { max-width: 32rem; margin: 0; color: #eee8df; }
+
+.catalogue {
+  width: min(100% - 3rem, 72rem);
+  margin: -2.5rem auto 0;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #e8e2da;
+  border-radius: 1.2rem 1.2rem 0 0;
+}
+
+.catalogue-summary {
+  display: flex;
+  gap: .4rem;
+  margin: 1.75rem 0 1rem;
+  color: #75695f;
+  font-size: .9rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 1.25rem;
+}
+
+.empty-state {
+  padding: 4rem 1rem;
+  text-align: center;
+  color: #75695f;
+
+  i { font-size: 1.5rem; color: #b88a52; }
+  h2 { margin: 1rem 0 .4rem; color: #2a211b; font-size: 1.35rem; }
+  button { padding: .55rem .9rem; color: #fff; background: #2a211b; border: 0; border-radius: .4rem; }
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  margin-top: 2rem;
+
+  > button,
+  .page-numbers button {
+    min-width: 2.25rem;
+    height: 2.25rem;
+    padding: 0 .65rem;
+    color: #4e4239;
+    font-size: .82rem;
+    font-weight: 700;
+    background: #fff;
+    border: 1px solid #e3ddd5;
+    border-radius: .4rem;
+  }
+
+  > button {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+
+    &:disabled { cursor: not-allowed; opacity: .4; }
+  }
+}
+
+.page-numbers { display: flex; gap: .35rem; }
+.page-numbers button:hover,
+.page-numbers .is-current { color: #fff; background: #2a211b; border-color: #2a211b; }
+
+@media (max-width: 575px) {
+  .products-hero { min-height: 17rem; padding-top: 3.5rem; }
+  .catalogue { width: calc(100% - 1.5rem); padding: 1rem; }
+  .pagination > button span { display: none; }
 }
