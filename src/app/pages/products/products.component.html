@@ -1,8 +1,7 @@
 <main class="products-page">
   <section class="products-hero">
-    <p class="eyebrow">The Men Cave collection</p>
-    <h1>Everyday essentials, <em>well chosen.</em></h1>
-    <p class="hero-copy">Browse practical pieces for a wardrobe that works as hard as you do.</p>
+    <p class="eyebrow">{{ eyebrow }}</p>
+    <h1>{{ headline }}</h1>
   </section>
 
   <section class="catalogue" aria-label="Products catalogue">
@@ -55,4 +54,4 @@
     </div>
   </section>
 </main>
-<app-footer></app-footer>
+<app-footer [lines]="footerLines"></app-footer>

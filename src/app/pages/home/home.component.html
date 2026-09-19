@@ -8,51 +8,23 @@
         <a [href]="homePage?.ctaUrl" class="primary-cta">{{ homePage?.ctaLabel }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
       </div>
     </div>
-    <div class="hero-image" [class.is-empty]="!featuredContentMedia.length">
-      <img *ngIf="featuredContentMedia[0]" [src]="featuredContentMedia[0].url" [alt]="featuredContentMedia[0].alt" />
+    <div class="hero-image" [class.is-empty]="!homePage?.heroMedia">
+      <img *ngIf="homePage?.heroMedia" [src]="homePage?.heroMedia?.url" [alt]="homePage?.heroMedia?.alt" />
       <div class="hero-image-overlay"></div>
     </div>
   </section>
 
-  <section *ngIf="homePage?.aboutDescription" class="content-section about-section" aria-labelledby="about-heading">
-    <h2 id="about-heading">{{ homePage?.aboutTitle }}</h2>
-    <p>{{ homePage?.aboutDescription }}</p>
-  </section>
-
-  <section class="featured-section" aria-labelledby="featured-heading">
+  <section *ngFor="let section of homePage?.sections; trackBy: trackBySection" class="content-section" [class.announcements-section]="section.media.length">
     <div class="section-heading">
       <div>
-        <h2 id="featured-heading">{{ homePage?.featuredTitle }}</h2>
-        <p class="section-copy">{{ homePage?.featuredDescription }}</p>
+        <h2>{{ section.title }}</h2>
+        <p *ngFor="let paragraph of section.paragraphs" class="section-copy">{{ paragraph }}</p>
+        <a *ngIf="section.link" [href]="section.link.url" class="primary-cta section-cta">{{ section.link.label }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
       </div>
     </div>
-
-    <div *ngIf="!loading && featuredContentMedia.length" class="featured-grid">
-      <article *ngFor="let image of featuredContentMedia; trackBy: trackByImageUrl" class="featured-card">
-        <img [src]="image.url" [alt]="image.alt" />
-        <div class="featured-card-body">
-          <h3>{{ image.alt }}</h3>
-        </div>
-      </article>
-    </div>
-
-  </section>
-
-  <section *ngIf="homePage?.contactDetails?.length" class="content-section contact-section" aria-labelledby="contact-heading">
-    <h2 id="contact-heading">{{ homePage?.contactTitle }}</h2>
-    <p *ngFor="let detail of homePage?.contactDetails">{{ detail }}</p>
-  </section>
-
-  <section *ngIf="homePage?.announcementsTitle || homePage?.announcementsDescription || announcementMedia.length" class="announcements-section" aria-labelledby="announcements-heading">
-    <div class="section-heading">
-      <div>
-        <h2 id="announcements-heading">{{ homePage?.announcementsTitle }}</h2>
-        <p *ngIf="homePage?.announcementsDescription" class="section-copy">{{ homePage?.announcementsDescription }}</p>
-      </div>
-    </div>
-    <div *ngIf="announcementMedia.length" class="announcements-grid">
-      <img *ngFor="let image of announcementMedia; trackBy: trackByImageUrl" [src]="image.url" [alt]="image.alt" />
+    <div *ngIf="section.media.length" class="announcements-grid">
+      <img *ngFor="let image of section.media; trackBy: trackByImageUrl" [src]="image.url" [alt]="image.alt" />
     </div>
   </section>
 </main>
-<app-footer></app-footer>
+<app-footer [lines]="homePage?.footerLines ?? []"></app-footer>

@@ -1,1 +1,4 @@
-<footer class="text-muted"><p>&copy; Copyright Asanda Majola 2023</p></footer>
+<footer class="text-muted">
+  <p *ngFor="let line of lines">{{ line }}</p>
+  <p *ngIf="!lines.length">&copy; Copyright Asanda Majola 2023</p>
+</footer>

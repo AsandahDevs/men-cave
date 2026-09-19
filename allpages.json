@@ -1,0 +1,505 @@
+{
+    "data": [
+        {
+            "id": 9,
+            "documentId": "fxaxny0bwywkw0dc6521qiek",
+            "createdAt": "2026-09-19T15:24:57.021Z",
+            "updatedAt": "2026-09-19T16:10:56.564Z",
+            "publishedAt": "2026-09-19T16:10:56.586Z",
+            "Title": "Products Page",
+            "Footer": {
+                "id": 5,
+                "Footer_Content": [
+                    {
+                        "type": "paragraph",
+                        "children": [
+                            {
+                                "type": "text",
+                                "text": "Copyright@2023"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "children": [
+                            {
+                                "type": "text",
+                                "text": "Mencave Inc."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Sectional_Content": [
+                {
+                    "id": 21,
+                    "Page_Section_Content": [
+                        {
+                            "type": "heading",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Step Into The Men Cave"
+                                }
+                            ],
+                            "level": 1
+                        },
+                        {
+                            "type": "heading",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Where masculinity is discovered"
+                                }
+                            ],
+                            "level": 2
+                        }
+                    ],
+                    "Page_link": null,
+                    "Page_Section_Media_Content": [],
+                    "List_of_products": [
+                        {
+                            "id": 25,
+                            "product_name": "black jeans",
+                            "product_desc": "casual jeans suitable for outings ",
+                            "product_price": 799.99,
+                            "is_sale": true
+                        },
+                        {
+                            "id": 26,
+                            "product_name": "skinny jeans",
+                            "product_desc": "a nice slim fit for the skinny legs",
+                            "product_price": 499.99,
+                            "is_sale": false
+                        },
+                        {
+                            "id": 27,
+                            "product_name": "L'Oreal beard oil",
+                            "product_desc": "beard oil suitable for bristle hair",
+                            "product_price": 1099.99,
+                            "is_sale": true
+                        },
+                        {
+                            "id": 28,
+                            "product_name": "Classic beard oil",
+                            "product_desc": "beard oil for everyday use on non-bristle hair",
+                            "product_price": 105.99,
+                            "is_sale": false
+                        },
+                        {
+                            "id": 29,
+                            "product_name": "Green leather jacket",
+                            "product_desc": "leather jacket for casual occasions",
+                            "product_price": 899.99,
+                            "is_sale": false
+                        },
+                        {
+                            "id": 30,
+                            "product_name": "Brown leather jacket",
+                            "product_desc": "leather jacket with color to match a wide variety of clothing styles",
+                            "product_price": 899.99,
+                            "is_sale": false
+                        },
+                        {
+                            "id": 31,
+                            "product_name": "classic black jacket",
+                            "product_desc": "the original makoya of jackets",
+                            "product_price": 999.99,
+                            "is_sale": false
+                        },
+                        {
+                            "id": 32,
+                            "product_name": "black leather shoes",
+                            "product_desc": "perfect for funerals or formal occasions",
+                            "product_price": 1499.99,
+                            "is_sale": false
+                        },
+                        {
+                            "id": 33,
+                            "product_name": "Timberlands",
+                            "product_desc": "high ankle boots for heavy weights",
+                            "product_price": 2999.99,
+                            "is_sale": false
+                        },
+                        {
+                            "id": 34,
+                            "product_name": "Happy socks ",
+                            "product_desc": "perfect fit for valentine's day",
+                            "product_price": 29.99,
+                            "is_sale": false
+                        },
+                        {
+                            "id": 35,
+                            "product_name": "Brown high ankle leather boots",
+                            "product_desc": "for hardworking dads",
+                            "product_price": 1699.99,
+                            "is_sale": false
+                        },
+                        {
+                            "id": 36,
+                            "product_name": "Rolex watch",
+                            "product_desc": "built for those with expensive taste",
+                            "product_price": 50000,
+                            "is_sale": false
+                        }
+                    ],
+                    "__component": "page-components.page-sections"
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "documentId": "o27erjqex7yq5810dnvfqud0",
+            "createdAt": "2026-09-19T09:31:48.100Z",
+            "updatedAt": "2026-09-19T16:43:52.375Z",
+            "publishedAt": "2026-09-19T16:43:52.392Z",
+            "Title": "Home Page",
+            "Footer": {
+                "id": 8,
+                "Footer_Content": [
+                    {
+                        "type": "paragraph",
+                        "children": [
+                            {
+                                "type": "text",
+                                "text": "Copyright@2023"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "children": [
+                            {
+                                "type": "text",
+                                "text": "Mencave Inc."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Sectional_Content": [
+                {
+                    "id": 32,
+                    "Page_Section_Content": [
+                        {
+                            "type": "heading",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "The Men Cave"
+                                }
+                            ],
+                            "level": 1
+                        },
+                        {
+                            "type": "heading",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Where man of relevance meets elegance"
+                                }
+                            ],
+                            "level": 2
+                        },
+                        {
+                            "type": "paragraph",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "We care not only about your dress code but  the desire to be unique"
+                                },
+                                {
+                                    "type": "link",
+                                    "url": "http://localhost:4200/products",
+                                    "children": [
+                                        {
+                                            "type": "text",
+                                            "text": ""
+                                        }
+                                    ],
+                                    "rel": "",
+                                    "target": ""
+                                },
+                                {
+                                    "text": "",
+                                    "type": "text"
+                                }
+                            ]
+                        }
+                    ],
+                    "Page_link": {
+                        "id": 7,
+                        "Link_Title": "Shop Now"
+                    },
+                    "Page_Section_Media_Content": [
+                        {
+                            "id": 13,
+                            "documentId": "t6du0qvvz1m08gqqg6j158n0",
+                            "name": "solees-time-_kz5VX5x4e4-unsplash.jpg",
+                            "alternativeText": null,
+                            "caption": null,
+                            "focalPoint": null,
+                            "width": 4929,
+                            "height": 3039,
+                            "formats": {
+                                "thumbnail": {
+                                    "name": "thumbnail_solees-time-_kz5VX5x4e4-unsplash.jpg",
+                                    "hash": "thumbnail_solees_time_kz5_VX_5x4e4_unsplash_edc6f61d76",
+                                    "ext": ".jpg",
+                                    "mime": "image/jpeg",
+                                    "path": null,
+                                    "width": 245,
+                                    "height": 151,
+                                    "size": 10.41,
+                                    "sizeInBytes": 10407,
+                                    "url": "/uploads/thumbnail_solees_time_kz5_VX_5x4e4_unsplash_edc6f61d76.jpg"
+                                },
+                                "medium": {
+                                    "name": "medium_solees-time-_kz5VX5x4e4-unsplash.jpg",
+                                    "hash": "medium_solees_time_kz5_VX_5x4e4_unsplash_edc6f61d76",
+                                    "ext": ".jpg",
+                                    "mime": "image/jpeg",
+                                    "path": null,
+                                    "width": 750,
+                                    "height": 462,
+                                    "size": 60.74,
+                                    "sizeInBytes": 60737,
+                                    "url": "/uploads/medium_solees_time_kz5_VX_5x4e4_unsplash_edc6f61d76.jpg"
+                                },
+                                "small": {
+                                    "name": "small_solees-time-_kz5VX5x4e4-unsplash.jpg",
+                                    "hash": "small_solees_time_kz5_VX_5x4e4_unsplash_edc6f61d76",
+                                    "ext": ".jpg",
+                                    "mime": "image/jpeg",
+                                    "path": null,
+                                    "width": 500,
+                                    "height": 308,
+                                    "size": 31.64,
+                                    "sizeInBytes": 31637,
+                                    "url": "/uploads/small_solees_time_kz5_VX_5x4e4_unsplash_edc6f61d76.jpg"
+                                },
+                                "large": {
+                                    "name": "large_solees-time-_kz5VX5x4e4-unsplash.jpg",
+                                    "hash": "large_solees_time_kz5_VX_5x4e4_unsplash_edc6f61d76",
+                                    "ext": ".jpg",
+                                    "mime": "image/jpeg",
+                                    "path": null,
+                                    "width": 1000,
+                                    "height": 616,
+                                    "size": 97.75,
+                                    "sizeInBytes": 97751,
+                                    "url": "/uploads/large_solees_time_kz5_VX_5x4e4_unsplash_edc6f61d76.jpg"
+                                }
+                            },
+                            "hash": "solees_time_kz5_VX_5x4e4_unsplash_edc6f61d76",
+                            "ext": ".jpg",
+                            "mime": "image/jpeg",
+                            "size": 2753.39,
+                            "url": "/uploads/solees_time_kz5_VX_5x4e4_unsplash_edc6f61d76.jpg",
+                            "previewUrl": null,
+                            "provider": "local",
+                            "provider_metadata": null,
+                            "createdAt": "2026-09-18T17:32:23.246Z",
+                            "updatedAt": "2026-09-18T17:32:23.246Z",
+                            "publishedAt": "2026-09-18T17:32:23.246Z"
+                        }
+                    ],
+                    "List_of_products": [],
+                    "__component": "page-components.page-sections"
+                },
+                {
+                    "id": 30,
+                    "Page_Section_Content": [
+                        {
+                            "type": "heading",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "About Us"
+                                }
+                            ],
+                            "level": 3
+                        },
+                        {
+                            "type": "paragraph",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "We are an online store that was established in the year 2023 with an aim to address mens' frustration with clothing lines that didn't cater to their masculine nature. Since inception we have grown by 78% YTD, this has been a huge milestone for us as we embark on making the online shopping experience intuitive and straight-forward for all men of all ages across the Southern African region. "
+                                }
+                            ]
+                        }
+                    ],
+                    "Page_link": null,
+                    "Page_Section_Media_Content": [],
+                    "List_of_products": [],
+                    "__component": "page-components.page-sections"
+                },
+                {
+                    "id": 33,
+                    "Page_Section_Content": [
+                        {
+                            "type": "heading",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Announcements"
+                                }
+                            ],
+                            "level": 3
+                        },
+                        {
+                            "type": "paragraph",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "We are super excited to announce a new product tha has been anticipated by all men of mature age . Introducing the L'Oreal beard oil , a captivating and soothing beard oil that softens bristle beard hair to give you that confortable and soothing feel to your face. This is currently on stock , so check out yhe product page for this amazing product."
+                                },
+                                {
+                                    "type": "link",
+                                    "url": "http://localhost:4200/products",
+                                    "children": [
+                                        {
+                                            "type": "text",
+                                            "text": ""
+                                        }
+                                    ],
+                                    "rel": "",
+                                    "target": ""
+                                },
+                                {
+                                    "text": "",
+                                    "type": "text"
+                                }
+                            ]
+                        }
+                    ],
+                    "Page_link": {
+                        "id": 8,
+                        "Link_Title": "Explore Products"
+                    },
+                    "Page_Section_Media_Content": [
+                        {
+                            "id": 5,
+                            "documentId": "y4alx5tivjkfq09egjop42cp",
+                            "name": "pelicular-studio-Sc27jfyFvcM-unsplash.jpg",
+                            "alternativeText": "L'Oreal beard oil",
+                            "caption": null,
+                            "focalPoint": null,
+                            "width": 3936,
+                            "height": 2624,
+                            "formats": {
+                                "thumbnail": {
+                                    "name": "thumbnail_pelicular-studio-Sc27jfyFvcM-unsplash.jpg",
+                                    "hash": "thumbnail_pelicular_studio_Sc27jfy_Fvc_M_unsplash_31fe4dd96b",
+                                    "ext": ".jpg",
+                                    "mime": "image/jpeg",
+                                    "path": null,
+                                    "width": 234,
+                                    "height": 156,
+                                    "size": 6.36,
+                                    "sizeInBytes": 6355,
+                                    "url": "/uploads/thumbnail_pelicular_studio_Sc27jfy_Fvc_M_unsplash_31fe4dd96b.jpg"
+                                },
+                                "medium": {
+                                    "name": "medium_pelicular-studio-Sc27jfyFvcM-unsplash.jpg",
+                                    "hash": "medium_pelicular_studio_Sc27jfy_Fvc_M_unsplash_31fe4dd96b",
+                                    "ext": ".jpg",
+                                    "mime": "image/jpeg",
+                                    "path": null,
+                                    "width": 750,
+                                    "height": 500,
+                                    "size": 65.13,
+                                    "sizeInBytes": 65132,
+                                    "url": "/uploads/medium_pelicular_studio_Sc27jfy_Fvc_M_unsplash_31fe4dd96b.jpg"
+                                },
+                                "small": {
+                                    "name": "small_pelicular-studio-Sc27jfyFvcM-unsplash.jpg",
+                                    "hash": "small_pelicular_studio_Sc27jfy_Fvc_M_unsplash_31fe4dd96b",
+                                    "ext": ".jpg",
+                                    "mime": "image/jpeg",
+                                    "path": null,
+                                    "width": 500,
+                                    "height": 333,
+                                    "size": 29.89,
+                                    "sizeInBytes": 29890,
+                                    "url": "/uploads/small_pelicular_studio_Sc27jfy_Fvc_M_unsplash_31fe4dd96b.jpg"
+                                },
+                                "large": {
+                                    "name": "large_pelicular-studio-Sc27jfyFvcM-unsplash.jpg",
+                                    "hash": "large_pelicular_studio_Sc27jfy_Fvc_M_unsplash_31fe4dd96b",
+                                    "ext": ".jpg",
+                                    "mime": "image/jpeg",
+                                    "path": null,
+                                    "width": 1000,
+                                    "height": 667,
+                                    "size": 114.36,
+                                    "sizeInBytes": 114355,
+                                    "url": "/uploads/large_pelicular_studio_Sc27jfy_Fvc_M_unsplash_31fe4dd96b.jpg"
+                                }
+                            },
+                            "hash": "pelicular_studio_Sc27jfy_Fvc_M_unsplash_31fe4dd96b",
+                            "ext": ".jpg",
+                            "mime": "image/jpeg",
+                            "size": 1517.08,
+                            "url": "/uploads/pelicular_studio_Sc27jfy_Fvc_M_unsplash_31fe4dd96b.jpg",
+                            "previewUrl": null,
+                            "provider": "local",
+                            "provider_metadata": null,
+                            "createdAt": "2026-09-18T16:24:19.572Z",
+                            "updatedAt": "2026-09-18T20:45:14.539Z",
+                            "publishedAt": "2026-09-18T16:24:19.572Z"
+                        }
+                    ],
+                    "List_of_products": [],
+                    "__component": "page-components.page-sections"
+                },
+                {
+                    "id": 31,
+                    "Page_Section_Content": [
+                        {
+                            "type": "heading",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Contact Us:"
+                                }
+                            ],
+                            "level": 3
+                        },
+                        {
+                            "type": "paragraph",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Whatsapp: (+27) 098 789 0098"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "paragraph",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Email: asanda.majola@gmail.com"
+                                }
+                            ]
+                        }
+                    ],
+                    "Page_link": null,
+                    "Page_Section_Media_Content": [],
+                    "List_of_products": [],
+                    "__component": "page-components.page-sections"
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "page": 1,
+            "pageSize": 25,
+            "pageCount": 1,
+            "total": 2
+        }
+    }
+}
