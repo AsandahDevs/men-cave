@@ -33,7 +33,7 @@ describe('ProductsDataService', () => {
       { type: 'heading', level: 1, children: [{ text: 'Step Into The Men Cave' }] },
       { type: 'heading', level: 2, children: [{ text: 'Where masculinity is discovered' }] },
     ] }] } });
-    productsRequest.flush({ data: [{ id: 2, name: 'black jeans', description: 'Jeans for all occasions', price: 899.99, is_on_sale: false, categories: [{ name: 'pants' }], image: { url: '/uploads/jeans.jpg' }], meta: { pagination: { page: 1, pageCount: 1, total: 1 } } });
+    productsRequest.flush({ data: [{ id: 2, name: 'black jeans', description: 'Jeans for all occasions', price: 899.99, is_on_sale: false, categories: [{ name: 'pants' }], image: { url: '/uploads/jeans.jpg' } }], meta: { pagination: { page: 1, pageCount: 1, total: 1 } } });
   });
 
   it('loads available categories from their collection endpoint', () => {
