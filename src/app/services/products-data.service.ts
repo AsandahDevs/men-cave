@@ -1,95 +1,87 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { forkJoin, map, Observable } from 'rxjs';
 import { Product } from '../interfaces/product';
 
-interface StrapiMedia {
-  url: string;
-}
-
+interface RichTextChild { text?: string; }
+interface RichTextBlock { children?: RichTextChild[]; level?: number; type?: string; }
+interface StrapiPage { Sectional_Content?: Array<{ __component: string; Page_Section_Content?: RichTextBlock[]; }>; }
+interface StrapiPageResponse { data: StrapiPage; }
 interface StrapiProduct {
   id: number;
   name: string;
-  price: number;
   description: string;
-  sale?: boolean;
-  image?: StrapiMedia[];
+  price: number;
+  is_on_sale?: boolean;
   categories?: Array<{ name: string }>;
+  image?: { url: string } | null;
 }
-
-interface StrapiProductListResponse {
+interface StrapiProductResponse {
   data: StrapiProduct[];
-  meta: {
-    pagination: {
-      page: number;
-      pageCount: number;
-      total: number;
-    };
-  };
+  meta: { pagination: { page: number; pageCount: number; total: number; } };
 }
+interface StrapiCategoryResponse { data: Array<{ name: string }>; }
 
-interface StrapiCategoryListResponse {
-  data: Array<{ name: string }>;
-}
+const productsPageUrl = '/api/pages/fxaxny0bwywkw0dc6521qiek?populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true';
 
 export interface ProductPage {
   products: Product[];
   page: number;
   pageCount: number;
   total: number;
+  eyebrow?: string;
+  headline?: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ProductsDataService  {
+@Injectable({ providedIn: 'root' })
+export class ProductsDataService {
+  constructor(private http: HttpClient) {}
 
-  constructor( private http: HttpClient) { }
-
-  getProducts(page: number, pageSize: number, searchTerm = '', category = 'All products'): Observable<ProductPage> {
+  getProducts(page: number, pageSize: number, searchTerm = '', category = 'All products', sort = 'name:asc'): Observable<ProductPage> {
     let params = new HttpParams()
-      .set('populate', 'image,categories')
+      .set('populate', 'categories,image')
+      .set('sort', sort)
       .set('pagination[page]', page)
       .set('pagination[pageSize]', pageSize);
 
-    if (searchTerm.trim()) {
-      params = params.set('filters[name][$containsi]', searchTerm.trim());
-    }
+    if (searchTerm.trim()) params = params.set('filters[name][$containsi]', searchTerm.trim());
+    if (category !== 'All products') params = params.set('filters[categories][name][$eq]', category);
 
-    if (category !== 'All products') {
-      params = params.set('filters[categories][name][$eq]', category);
-    }
-
-    return this.http
-      .get<StrapiProductListResponse>('/api/products', { params })
-      .pipe(map(({ data, meta }) => ({
-        products: data.map((product) => this.toProduct(product)),
-        page: meta.pagination.page,
-        pageCount: meta.pagination.pageCount,
-        total: meta.pagination.total,
-      })));
+    return forkJoin({
+      page: this.http.get<StrapiPageResponse>(productsPageUrl),
+      catalogue: this.http.get<StrapiProductResponse>('/api/products', { params }),
+    }).pipe(map(({ page, catalogue }) => {
+      const section = (page.data.Sectional_Content ?? []).find((item) => item.__component === 'page-components.page-sections');
+      return {
+        products: catalogue.data.map((product) => this.toProduct(product)),
+        page: catalogue.meta.pagination.page,
+        pageCount: catalogue.meta.pagination.pageCount,
+        total: catalogue.meta.pagination.total,
+        eyebrow: this.heading(section?.Page_Section_Content ?? [], 1),
+        headline: this.heading(section?.Page_Section_Content ?? [], 2),
+      };
+    }));
   }
 
   getCategories(): Observable<string[]> {
-    return this.http
-      .get<StrapiCategoryListResponse>('/api/categories?sort=name')
-      .pipe(map(({ data }) => data.map((category) => category.name)));
+    return this.http.get<StrapiCategoryResponse>('/api/categories?sort=name').pipe(
+      map(({ data }) => data.map((category) => category.name))
+    );
   }
 
   private toProduct(product: StrapiProduct): Product {
     return {
       id: product.id,
-      title: this.toSentenceCase(product.name),
+      title: product.name,
       price: product.price,
       description: product.description,
       category: product.categories?.[0]?.name ?? '',
-      image: product.image?.[0]?.url ?? '',
-      sale: product.sale ?? false,
+      image: product.image?.url ?? '',
+      sale: product.is_on_sale ?? false,
     };
   }
 
-  private toSentenceCase(value: string): string {
-    const normalized = value.trim().toLocaleLowerCase();
-    return normalized ? normalized[0].toLocaleUpperCase() + normalized.slice(1) : normalized;
+  private heading(blocks: RichTextBlock[], level: number): string {
+    return (blocks.find((block) => block.type === 'heading' && block.level === level)?.children ?? []).map((child) => child.text ?? '').join('').trim();
   }
 }

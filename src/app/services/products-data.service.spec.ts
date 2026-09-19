@@ -1,75 +1,44 @@
 import { TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ProductsDataService } from './products-data.service';
-import { HttpClientTestingModule,HttpTestingController} from '@angular/common/http/testing';
 
 describe('ProductsDataService', () => {
   let service: ProductsDataService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ProductsDataService],
-    });
+    TestBed.configureTestingModule({ imports: [HttpClientTestingModule] });
     service = TestBed.inject(ProductsDataService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-  afterEach(() => {
-    httpMock.verify();
-  });
+  afterEach(() => httpMock.verify());
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('should retrieve products from the API', () => {
-    const strapiResponse = {
-      data: [
-      {
-        id: 1,
-        name: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
-        price: 109.95,
-        description:
-          'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
-        image: [{ url: '/uploads/fjallraven.jpg' }],
-        categories: [{ name: 'bags' }],
-        sale: true,
-      },
-    ]};
-
-    const expectedProducts = [{
-      id: 1,
-      title: 'Fjallraven - foldsack no. 1 backpack, fits 15 laptops',
-      price: 109.95,
-      description:
-        'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
-      category: 'bags',
-      image: '/uploads/fjallraven.jpg',
-      sale: true,
-    }];
-
-    service.getProducts(1, 8).subscribe((result) => {
-      expect(result.products).toEqual(expectedProducts);
+  it('loads the page heading and a server-paginated product collection', () => {
+    service.getProducts(1, 8, 'jeans', 'pants').subscribe((result) => {
+      expect(result.products).toEqual([jasmine.objectContaining({ title: 'black jeans', category: 'pants', image: '/uploads/jeans.jpg' })]);
       expect(result.total).toBe(1);
+      expect(result.headline).toBe('Where masculinity is discovered');
     });
 
-    const req = httpMock.expectOne((request) => request.url === '/api/products');
-    expect(req.request.method).toBe('GET');
-    expect(req.request.params.get('populate')).toBe('image,categories');
-    expect(req.request.params.get('pagination[page]')).toBe('1');
-    expect(req.request.params.get('pagination[pageSize]')).toBe('8');
-    req.flush({ ...strapiResponse, meta: { pagination: { page: 1, pageCount: 1, total: 1 } } });
+    const pageRequest = httpMock.expectOne((request) => request.url.includes('/api/pages/fxaxny0bwywkw0dc6521qiek'));
+    const productsRequest = httpMock.expectOne((request) => request.url === '/api/products');
+    expect(productsRequest.request.params.get('populate')).toBe('categories,image');
+    expect(productsRequest.request.params.get('sort')).toBe('name:asc');
+    expect(productsRequest.request.params.get('filters[name][$containsi]')).toBe('jeans');
+    expect(productsRequest.request.params.get('filters[categories][name][$eq]')).toBe('pants');
+    expect(productsRequest.request.params.get('pagination[pageSize]')).toBe('8');
+
+    pageRequest.flush({ data: { Sectional_Content: [{ __component: 'page-components.page-sections', Page_Section_Content: [
+      { type: 'heading', level: 1, children: [{ text: 'Step Into The Men Cave' }] },
+      { type: 'heading', level: 2, children: [{ text: 'Where masculinity is discovered' }] },
+    ] }] } });
+    productsRequest.flush({ data: [{ id: 2, name: 'black jeans', description: 'Jeans for all occasions', price: 899.99, is_on_sale: false, categories: [{ name: 'pants' }], image: { url: '/uploads/jeans.jpg' } }], meta: { pagination: { page: 1, pageCount: 1, total: 1 } } });
   });
 
-  it('should request product images and categories', () => {
-
-    service.getProducts(1, 6, 'jacket', 'jackets').subscribe();
-
-    const req = httpMock.expectOne((request) => request.url === '/api/products');
-    expect(req.request.params.get('filters[name][$containsi]')).toBe('jacket');
-    expect(req.request.params.get('filters[categories][name][$eq]')).toBe('jackets');
-    req.flush({ data: [], meta: { pagination: { page: 1, pageCount: 1, total: 0 } } });
+  it('loads available categories from their collection endpoint', () => {
+    service.getCategories().subscribe((categories) => expect(categories).toEqual(['jackets', 'pants']));
+    const request = httpMock.expectOne('/api/categories?sort=name');
+    request.flush({ data: [{ name: 'jackets' }, { name: 'pants' }] });
   });
 });

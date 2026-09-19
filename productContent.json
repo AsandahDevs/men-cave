@@ -1,0 +1,41 @@
+{
+    "data": {
+        "id": 9,
+        "documentId": "fxaxny0bwywkw0dc6521qiek",
+        "createdAt": "2026-09-19T15:24:57.021Z",
+        "updatedAt": "2026-09-19T16:10:56.564Z",
+        "publishedAt": "2026-09-19T16:10:56.586Z",
+        "Title": "Products Page",
+        "Sectional_Content": [
+            {
+                "id": 21,
+                "Page_Section_Content": [
+                    {
+                        "type": "heading",
+                        "children": [
+                            {
+                                "type": "text",
+                                "text": "Step Into The Men Cave"
+                            }
+                        ],
+                        "level": 1
+                    },
+                    {
+                        "type": "heading",
+                        "children": [
+                            {
+                                "type": "text",
+                                "text": "Where masculinity is discovered"
+                            }
+                        ],
+                        "level": 2
+                    }
+                ],
+                "Page_link": null,
+                "Page_Section_Media_Content": [],
+                "__component": "page-components.page-sections"
+            }
+        ]
+    },
+    "meta": {}
+}

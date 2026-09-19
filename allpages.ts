@@ -1,0 +1,1 @@
+const pagesUrl = 'http://localhost:1337/api/pages?populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true'

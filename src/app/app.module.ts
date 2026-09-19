@@ -11,6 +11,7 @@ import { ProductsModule } from './pages/products/products.module';
 import { NonExistantModule } from './pages/non-existant/non-existant.module';
 import { ShoppingCartModule } from './pages/shopping-cart/shopping-cart.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ComponentsModule } from './components/components.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ProductsModule,
     NonExistantModule,
     ShoppingCartModule,
-    HttpClientModule
+    HttpClientModule,
+    ComponentsModule,
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent],

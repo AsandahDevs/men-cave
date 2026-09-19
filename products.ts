@@ -1,0 +1,1 @@
+const productsUrl = 'http://localhost:1337/api/pages/fxaxny0bwywkw0dc6521qiek?populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true';

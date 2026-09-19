@@ -30,4 +30,14 @@
       {{ category }}
     </button>
   </div>
+
+  <label class="sort-control" for="product-sort">
+    <span>Sort by</span>
+    <select id="product-sort" [value]="selectedSort" (change)="selectSort($event)">
+      <option value="name:asc">Name: A–Z</option>
+      <option value="name:desc">Name: Z–A</option>
+      <option value="price:asc">Price: low to high</option>
+      <option value="price:desc">Price: high to low</option>
+    </select>
+  </label>
 </section>

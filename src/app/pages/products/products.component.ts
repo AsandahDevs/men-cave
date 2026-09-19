@@ -14,11 +14,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   categories: string[] = [];
   selectedCategory = 'All products';
+  selectedSort = 'name:asc';
   searchTerm = '';
   currentPage = 1;
   readonly pageSize = 8;
   totalProducts = 0;
   totalPages = 1;
+  eyebrow = 'The Men Cave collection';
+  headline = 'Everyday essentials, well chosen.';
   private subscriptions = new Subscription();
   private searchTerms = new Subject<string>();
   private productRequest?: Subscription;
@@ -56,6 +59,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.loadProducts();
   }
 
+  setSort(sort: string): void {
+    this.selectedSort = sort;
+    this.currentPage = 1;
+    this.loadProducts();
+  }
+
   setPage(page: number): void {
     const nextPage = Math.min(Math.max(page, 1), this.totalPages);
     if (nextPage === this.currentPage) return;
@@ -68,13 +77,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.message = 'Loading products...';
     this.productRequest = this.productService
-      .getProducts(this.currentPage, this.pageSize, this.searchTerm, this.selectedCategory)
+      .getProducts(this.currentPage, this.pageSize, this.searchTerm, this.selectedCategory, this.selectedSort)
       .subscribe({
         next: (result) => {
           this.products = result.products;
           this.totalProducts = result.total;
           this.totalPages = Math.max(1, result.pageCount);
           this.currentPage = result.page;
+          this.eyebrow = result.eyebrow || this.eyebrow;
+          this.headline = result.headline || this.headline;
           this.loading = false;
         },
         error: (error) => {

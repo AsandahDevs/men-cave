@@ -1,0 +1,20 @@
+.text-muted {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e9ecef;
+  /* Matches the navbar's Bootstrap .container-fluid horizontal gutter. */
+  padding: 1.25rem .75rem;
+}
+
+.footer-logo {
+  position: absolute;
+  left: .75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+}
+
+.text-muted > div { text-align: center; }
+p { margin: 0; }
