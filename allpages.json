@@ -7,29 +7,6 @@
             "updatedAt": "2026-09-19T16:10:56.564Z",
             "publishedAt": "2026-09-19T16:10:56.586Z",
             "Title": "Products Page",
-            "Footer": {
-                "id": 5,
-                "Footer_Content": [
-                    {
-                        "type": "paragraph",
-                        "children": [
-                            {
-                                "type": "text",
-                                "text": "Copyright@2023"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "paragraph",
-                        "children": [
-                            {
-                                "type": "text",
-                                "text": "Mencave Inc."
-                            }
-                        ]
-                    }
-                ]
-            },
             "Sectional_Content": [
                 {
                     "id": 21,
@@ -57,92 +34,6 @@
                     ],
                     "Page_link": null,
                     "Page_Section_Media_Content": [],
-                    "List_of_products": [
-                        {
-                            "id": 25,
-                            "product_name": "black jeans",
-                            "product_desc": "casual jeans suitable for outings ",
-                            "product_price": 799.99,
-                            "is_sale": true
-                        },
-                        {
-                            "id": 26,
-                            "product_name": "skinny jeans",
-                            "product_desc": "a nice slim fit for the skinny legs",
-                            "product_price": 499.99,
-                            "is_sale": false
-                        },
-                        {
-                            "id": 27,
-                            "product_name": "L'Oreal beard oil",
-                            "product_desc": "beard oil suitable for bristle hair",
-                            "product_price": 1099.99,
-                            "is_sale": true
-                        },
-                        {
-                            "id": 28,
-                            "product_name": "Classic beard oil",
-                            "product_desc": "beard oil for everyday use on non-bristle hair",
-                            "product_price": 105.99,
-                            "is_sale": false
-                        },
-                        {
-                            "id": 29,
-                            "product_name": "Green leather jacket",
-                            "product_desc": "leather jacket for casual occasions",
-                            "product_price": 899.99,
-                            "is_sale": false
-                        },
-                        {
-                            "id": 30,
-                            "product_name": "Brown leather jacket",
-                            "product_desc": "leather jacket with color to match a wide variety of clothing styles",
-                            "product_price": 899.99,
-                            "is_sale": false
-                        },
-                        {
-                            "id": 31,
-                            "product_name": "classic black jacket",
-                            "product_desc": "the original makoya of jackets",
-                            "product_price": 999.99,
-                            "is_sale": false
-                        },
-                        {
-                            "id": 32,
-                            "product_name": "black leather shoes",
-                            "product_desc": "perfect for funerals or formal occasions",
-                            "product_price": 1499.99,
-                            "is_sale": false
-                        },
-                        {
-                            "id": 33,
-                            "product_name": "Timberlands",
-                            "product_desc": "high ankle boots for heavy weights",
-                            "product_price": 2999.99,
-                            "is_sale": false
-                        },
-                        {
-                            "id": 34,
-                            "product_name": "Happy socks ",
-                            "product_desc": "perfect fit for valentine's day",
-                            "product_price": 29.99,
-                            "is_sale": false
-                        },
-                        {
-                            "id": 35,
-                            "product_name": "Brown high ankle leather boots",
-                            "product_desc": "for hardworking dads",
-                            "product_price": 1699.99,
-                            "is_sale": false
-                        },
-                        {
-                            "id": 36,
-                            "product_name": "Rolex watch",
-                            "product_desc": "built for those with expensive taste",
-                            "product_price": 50000,
-                            "is_sale": false
-                        }
-                    ],
                     "__component": "page-components.page-sections"
                 }
             ]
@@ -154,29 +45,6 @@
             "updatedAt": "2026-09-19T16:43:52.375Z",
             "publishedAt": "2026-09-19T16:43:52.392Z",
             "Title": "Home Page",
-            "Footer": {
-                "id": 8,
-                "Footer_Content": [
-                    {
-                        "type": "paragraph",
-                        "children": [
-                            {
-                                "type": "text",
-                                "text": "Copyright@2023"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "paragraph",
-                        "children": [
-                            {
-                                "type": "text",
-                                "text": "Mencave Inc."
-                            }
-                        ]
-                    }
-                ]
-            },
             "Sectional_Content": [
                 {
                     "id": 32,
@@ -304,7 +172,6 @@
                             "publishedAt": "2026-09-18T17:32:23.246Z"
                         }
                     ],
-                    "List_of_products": [],
                     "__component": "page-components.page-sections"
                 },
                 {
@@ -332,7 +199,6 @@
                     ],
                     "Page_link": null,
                     "Page_Section_Media_Content": [],
-                    "List_of_products": [],
                     "__component": "page-components.page-sections"
                 },
                 {
@@ -451,7 +317,6 @@
                             "publishedAt": "2026-09-18T16:24:19.572Z"
                         }
                     ],
-                    "List_of_products": [],
                     "__component": "page-components.page-sections"
                 },
                 {
@@ -488,7 +353,6 @@
                     ],
                     "Page_link": null,
                     "Page_Section_Media_Content": [],
-                    "List_of_products": [],
                     "__component": "page-components.page-sections"
                 }
             ]

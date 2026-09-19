@@ -6,29 +6,6 @@
         "updatedAt": "2026-09-19T16:43:52.375Z",
         "publishedAt": "2026-09-19T16:43:52.392Z",
         "Title": "Home Page",
-        "Footer": {
-            "id": 8,
-            "Footer_Content": [
-                {
-                    "type": "paragraph",
-                    "children": [
-                        {
-                            "type": "text",
-                            "text": "Copyright@2023"
-                        }
-                    ]
-                },
-                {
-                    "type": "paragraph",
-                    "children": [
-                        {
-                            "type": "text",
-                            "text": "Mencave Inc."
-                        }
-                    ]
-                }
-            ]
-        },
         "Sectional_Content": [
             {
                 "id": 32,
@@ -156,7 +133,6 @@
                         "publishedAt": "2026-09-18T17:32:23.246Z"
                     }
                 ],
-                "List_of_products": [],
                 "__component": "page-components.page-sections"
             },
             {
@@ -184,7 +160,6 @@
                 ],
                 "Page_link": null,
                 "Page_Section_Media_Content": [],
-                "List_of_products": [],
                 "__component": "page-components.page-sections"
             },
             {
@@ -303,7 +278,6 @@
                         "publishedAt": "2026-09-18T16:24:19.572Z"
                     }
                 ],
-                "List_of_products": [],
                 "__component": "page-components.page-sections"
             },
             {
@@ -340,7 +314,6 @@
                 ],
                 "Page_link": null,
                 "Page_Section_Media_Content": [],
-                "List_of_products": [],
                 "__component": "page-components.page-sections"
             }
         ]
