@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { HomePageDataService } from 'src/app/services/home-page-data.service';
 import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -12,7 +13,7 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
-      imports:[ComponentsModule],
+      imports:[ComponentsModule, HttpClientTestingModule],
       providers: [{
         provide: HomePageDataService,
         useValue: {
