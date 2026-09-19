@@ -18,7 +18,7 @@ interface StrapiPage { Footer?: { Footer_Content?: RichTextBlock[] }; Sectional_
 interface StrapiPageResponse { data: StrapiPage; }
 
 // The products are now a nested field of the page-sections Dynamic Zone component.
-const productsUrl = '/api/pages/fxaxny0bwywkw0dc6521qiek?populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true&populate[Sectional_Content][on][page-components.page-sections][populate][List_of_products][populate][categories]=true&populate[Sectional_Content][on][page-components.page-sections][populate][List_of_products][populate][product_image]=true&populate[Footer]=true';
+const productsUrl = '/api/pages/fxaxny0bwywkw0dc6521qiek?populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true&populate[Sectional_Content][on][page-components.page-sections][populate][List_of_products][populate][categories]=true&populate[Sectional_Content][on][page-components.page-sections][populate][List_of_products][populate][product_image]=true';
 
 export interface ProductPage {
   products: Product[];
