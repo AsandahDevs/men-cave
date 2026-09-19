@@ -1,4 +1,7 @@
 <footer class="text-muted">
-  <p *ngFor="let line of lines">{{ line }}</p>
-  <p *ngIf="!lines.length">&copy; Copyright Asanda Majola 2023</p>
+  <img *ngIf="logoUrl" class="footer-logo" [src]="logoUrl" [alt]="logoAlt" />
+  <div>
+    <p *ngFor="let line of lines">{{ line }}</p>
+    <p *ngIf="!lines.length">&copy; Copyright Asanda Majola 2023</p>
+  </div>
 </footer>

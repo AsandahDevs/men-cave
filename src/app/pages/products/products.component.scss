@@ -8,7 +8,7 @@
   min-height: 20rem;
   padding: 4.5rem max(1.5rem, calc((100vw - 72rem) / 2));
   color: #fff;
-  background: linear-gradient(90deg, rgba(22, 16, 12, .92), rgba(22, 16, 12, .43)), url('/assets/images/jens-lindner.jpg') center 38% / cover;
+  background: url('/assets/images/jens-lindner.jpg') center 38% / cover;
 
   h1 {
     max-width: 42rem;
