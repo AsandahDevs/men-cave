@@ -24,6 +24,7 @@ describe('ProductsDataService', () => {
     const pageRequest = httpMock.expectOne((request) => request.url.includes('/api/pages/fxaxny0bwywkw0dc6521qiek'));
     const productsRequest = httpMock.expectOne((request) => request.url === '/api/products');
     expect(productsRequest.request.params.get('populate')).toBe('categories,image');
+    expect(productsRequest.request.params.get('sort')).toBe('name:asc');
     expect(productsRequest.request.params.get('filters[name][$containsi]')).toBe('jeans');
     expect(productsRequest.request.params.get('filters[categories][name][$eq]')).toBe('pants');
     expect(productsRequest.request.params.get('pagination[pageSize]')).toBe('8');

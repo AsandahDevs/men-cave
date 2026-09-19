@@ -9,8 +9,10 @@
       [categories]="categories"
       [selectedCategory]="selectedCategory"
       [searchTerm]="searchTerm"
+      [selectedSort]="selectedSort"
       (selectedCategoryChange)="setCategory($event)"
       (searchTermChange)="setSearchTerm($event)"
+      (selectedSortChange)="setSort($event)"
     ></app-product-filters>
 
     <div class="catalogue-summary" aria-live="polite">

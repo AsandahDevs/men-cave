@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   categories: string[] = [];
   selectedCategory = 'All products';
+  selectedSort = 'name:asc';
   searchTerm = '';
   currentPage = 1;
   readonly pageSize = 8;
@@ -58,6 +59,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.loadProducts();
   }
 
+  setSort(sort: string): void {
+    this.selectedSort = sort;
+    this.currentPage = 1;
+    this.loadProducts();
+  }
+
   setPage(page: number): void {
     const nextPage = Math.min(Math.max(page, 1), this.totalPages);
     if (nextPage === this.currentPage) return;
@@ -70,7 +77,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.message = 'Loading products...';
     this.productRequest = this.productService
-      .getProducts(this.currentPage, this.pageSize, this.searchTerm, this.selectedCategory)
+      .getProducts(this.currentPage, this.pageSize, this.searchTerm, this.selectedCategory, this.selectedSort)
       .subscribe({
         next: (result) => {
           this.products = result.products;

@@ -37,9 +37,10 @@ export interface ProductPage {
 export class ProductsDataService {
   constructor(private http: HttpClient) {}
 
-  getProducts(page: number, pageSize: number, searchTerm = '', category = 'All products'): Observable<ProductPage> {
+  getProducts(page: number, pageSize: number, searchTerm = '', category = 'All products', sort = 'name:asc'): Observable<ProductPage> {
     let params = new HttpParams()
       .set('populate', 'categories,image')
+      .set('sort', sort)
       .set('pagination[page]', page)
       .set('pagination[pageSize]', pageSize);
 
