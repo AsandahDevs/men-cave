@@ -21,7 +21,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   totalPages = 1;
   eyebrow = 'The Men Cave collection';
   headline = 'Everyday essentials, well chosen.';
-  footerLines: string[] = [];
   private subscriptions = new Subscription();
   private searchTerms = new Subject<string>();
   private productRequest?: Subscription;
@@ -80,7 +79,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.currentPage = result.page;
           this.eyebrow = result.eyebrow || this.eyebrow;
           this.headline = result.headline || this.headline;
-          this.footerLines = result.footerLines;
           this.loading = false;
         },
         error: (error) => {

@@ -14,7 +14,7 @@ export interface HomeSection { title: string; paragraphs: string[]; link?: { lab
 export interface HomePageContent { brandTitle: string; headline: string; description: string; ctaLabel: string; ctaUrl: string; heroMedia?: AnnouncementMedia; sections: HomeSection[]; footerLines: string[]; }
 
 // Fragment population is required for media and components nested in a Dynamic Zone.
-const homepageUrl = '/api/pages/o27erjqex7yq5810dnvfqud0?populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true&populate[Sectional_Content][on][page-components.page-sections][populate][List_of_products]=true';
+const homepageUrl = '/api/pages/o27erjqex7yq5810dnvfqud0?populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true';
 
 @Injectable({ providedIn: 'root' })
 export class HomePageDataService {
