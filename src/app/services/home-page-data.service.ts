@@ -21,7 +21,7 @@ export class HomePageDataService {
   constructor(private http: HttpClient) {}
 
   getHomePage(): Observable<HomePageContent> {
-    return this.http.get<StrapiPageResponse>(this.pageUrl('home-page')).pipe(map(({ data }) => this.toHomePageContent(this.requirePage(data, 'home-page'))));
+    return this.http.get<StrapiPageResponse>(this.pageUrl('home')).pipe(map(({ data }) => this.toHomePageContent(this.requirePage(data, 'home'))));
   }
 
   private pageUrl(slug: string): string {

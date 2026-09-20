@@ -48,10 +48,10 @@ export class ProductsDataService {
     if (category !== 'All products') params = params.set('filters[categories][name][$eq]', category);
 
     return forkJoin({
-      page: this.http.get<StrapiPageResponse>(this.pageUrl('products-page')),
+      page: this.http.get<StrapiPageResponse>(this.pageUrl('products')),
       catalogue: this.http.get<StrapiProductResponse>('/api/products', { params }),
     }).pipe(map(({ page, catalogue }) => {
-      const pageData = this.requirePage(page.data, 'products-page');
+      const pageData = this.requirePage(page.data, 'products');
       const section = (pageData.Sectional_Content ?? []).find((item) => item.__component === 'page-components.page-sections');
       return {
         products: catalogue.data.map((product) => this.toProduct(product)),

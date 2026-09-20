@@ -22,7 +22,7 @@ describe('ProductsDataService', () => {
     });
 
     const pageRequest = httpMock.expectOne((request) =>
-      request.url === '/api/pages' && request.urlWithParams.includes('filters[slug][$eq]=products-page')
+      request.url === '/api/pages' && request.urlWithParams.includes('filters[slug][$eq]=products')
     );
     const productsRequest = httpMock.expectOne((request) => request.url === '/api/products');
     expect(productsRequest.request.params.get('populate')).toBe('categories,image');
@@ -31,7 +31,7 @@ describe('ProductsDataService', () => {
     expect(productsRequest.request.params.get('filters[categories][name][$eq]')).toBe('pants');
     expect(productsRequest.request.params.get('pagination[pageSize]')).toBe('8');
 
-    pageRequest.flush({ data: [{ slug: 'products-page', Sectional_Content: [{ __component: 'page-components.page-sections', Page_Section_Content: [
+    pageRequest.flush({ data: [{ slug: 'products', Sectional_Content: [{ __component: 'page-components.page-sections', Page_Section_Content: [
       { type: 'heading', level: 1, children: [{ text: 'Step Into The Men Cave' }] },
       { type: 'heading', level: 2, children: [{ text: 'Where masculinity is discovered' }] },
     ] }] }] });

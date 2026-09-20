@@ -47,8 +47,8 @@ The navbar and footer are rendered from the root app shell.
 
 Page requests no longer hardcode Strapi document IDs.
 
-- Home requests the `home-page` slug.
-- Products page layout requests the `products-page` slug.
+- Home requests the `home` slug.
+- Products page layout requests the `products` slug.
 
 Both use `/api/pages` with `fields=slug`, the Dynamic Zone fragment populates, and a `filters[slug][$eq]` filter. Ensure these UID values exist in Strapi, or update the frontend constants to match the generated values.
 
