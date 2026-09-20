@@ -6,22 +6,34 @@ interface RichTextChild { children?: RichTextChild[]; text?: string; type?: stri
 interface RichTextBlock { children?: RichTextChild[]; level?: number; type?: string; }
 interface StrapiMedia { alternativeText?: string | null; name: string; url: string; }
 interface PageSection { __component: 'page-components.page-sections'; Page_Section_Content?: RichTextBlock[]; Page_link?: { Link_Title?: string } | null; Page_Section_Media_Content?: StrapiMedia[]; }
-interface StrapiPage { Footer?: { Footer_Content?: RichTextBlock[] } | null; Sectional_Content?: PageSection[]; }
-interface StrapiPageResponse { data: StrapiPage; }
+interface StrapiPage { slug?: string; Footer?: { Footer_Content?: RichTextBlock[] } | null; Sectional_Content?: PageSection[]; }
+interface StrapiPageResponse { data: StrapiPage[]; }
 
 export interface AnnouncementMedia { url: string; alt: string; }
 export interface HomeSection { title: string; paragraphs: string[]; link?: { label: string; url: string }; media: AnnouncementMedia[]; }
 export interface HomePageContent { brandTitle: string; headline: string; description: string; ctaLabel: string; ctaUrl: string; heroMedia?: AnnouncementMedia; sections: HomeSection[]; footerLines: string[]; }
 
 // Fragment population is required for media and components nested in a Dynamic Zone.
-const homepageUrl = '/api/pages/o27erjqex7yq5810dnvfqud0?populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true';
+const pagePopulate = 'populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true&fields=slug';
 
 @Injectable({ providedIn: 'root' })
 export class HomePageDataService {
   constructor(private http: HttpClient) {}
 
   getHomePage(): Observable<HomePageContent> {
-    return this.http.get<StrapiPageResponse>(homepageUrl).pipe(map(({ data }) => this.toHomePageContent(data)));
+    return this.http.get<StrapiPageResponse>(this.pageUrl('home-page')).pipe(map(({ data }) => this.toHomePageContent(this.requirePage(data, 'home-page'))));
+  }
+
+  private pageUrl(slug: string): string {
+    return `/api/pages?${pagePopulate}&filters[slug][$eq]=${encodeURIComponent(slug)}`;
+  }
+
+  private requirePage(pages: StrapiPage[], slug: string): StrapiPage {
+    // Keep the client safe if Strapi returns more than one page (for example,
+    // while a duplicate slug is being cleaned up in the CMS).
+    const page = pages.find((candidate) => candidate.slug === slug);
+    if (!page) throw new Error(`Strapi page with slug "${slug}" was not found.`);
+    return page;
   }
 
   private toHomePageContent(page: StrapiPage): HomePageContent {

@@ -5,8 +5,8 @@ import { Product } from '../interfaces/product';
 
 interface RichTextChild { text?: string; }
 interface RichTextBlock { children?: RichTextChild[]; level?: number; type?: string; }
-interface StrapiPage { Sectional_Content?: Array<{ __component: string; Page_Section_Content?: RichTextBlock[]; }>; }
-interface StrapiPageResponse { data: StrapiPage; }
+interface StrapiPage { slug?: string; Sectional_Content?: Array<{ __component: string; Page_Section_Content?: RichTextBlock[]; }>; }
+interface StrapiPageResponse { data: StrapiPage[]; }
 interface StrapiProduct {
   id: number;
   name: string;
@@ -22,7 +22,7 @@ interface StrapiProductResponse {
 }
 interface StrapiCategoryResponse { data: Array<{ name: string }>; }
 
-const productsPageUrl = '/api/pages/fxaxny0bwywkw0dc6521qiek?populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true';
+const pagePopulate = 'populate[Sectional_Content][on][page-components.page-sections][populate][Page_link]=true&populate[Sectional_Content][on][page-components.page-sections][populate][Page_Section_Media_Content]=true&fields=slug';
 
 export interface ProductPage {
   products: Product[];
@@ -48,10 +48,11 @@ export class ProductsDataService {
     if (category !== 'All products') params = params.set('filters[categories][name][$eq]', category);
 
     return forkJoin({
-      page: this.http.get<StrapiPageResponse>(productsPageUrl),
+      page: this.http.get<StrapiPageResponse>(this.pageUrl('products-page')),
       catalogue: this.http.get<StrapiProductResponse>('/api/products', { params }),
     }).pipe(map(({ page, catalogue }) => {
-      const section = (page.data.Sectional_Content ?? []).find((item) => item.__component === 'page-components.page-sections');
+      const pageData = this.requirePage(page.data, 'products-page');
+      const section = (pageData.Sectional_Content ?? []).find((item) => item.__component === 'page-components.page-sections');
       return {
         products: catalogue.data.map((product) => this.toProduct(product)),
         page: catalogue.meta.pagination.page,
@@ -67,6 +68,18 @@ export class ProductsDataService {
     return this.http.get<StrapiCategoryResponse>('/api/categories?sort=name').pipe(
       map(({ data }) => data.map((category) => category.name))
     );
+  }
+
+  private pageUrl(slug: string): string {
+    return `/api/pages?${pagePopulate}&filters[slug][$eq]=${encodeURIComponent(slug)}`;
+  }
+
+  private requirePage(pages: StrapiPage[], slug: string): StrapiPage {
+    // Do not render another page's layout if a malformed API response contains
+    // more than one result.
+    const page = pages.find((candidate) => candidate.slug === slug);
+    if (!page) throw new Error(`Strapi page with slug "${slug}" was not found.`);
+    return page;
   }
 
   private toProduct(product: StrapiProduct): Product {

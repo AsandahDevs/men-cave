@@ -21,7 +21,9 @@ describe('ProductsDataService', () => {
       expect(result.headline).toBe('Where masculinity is discovered');
     });
 
-    const pageRequest = httpMock.expectOne((request) => request.url.includes('/api/pages/fxaxny0bwywkw0dc6521qiek'));
+    const pageRequest = httpMock.expectOne((request) =>
+      request.url === '/api/pages' && request.urlWithParams.includes('filters[slug][$eq]=products-page')
+    );
     const productsRequest = httpMock.expectOne((request) => request.url === '/api/products');
     expect(productsRequest.request.params.get('populate')).toBe('categories,image');
     expect(productsRequest.request.params.get('sort')).toBe('name:asc');
@@ -29,10 +31,10 @@ describe('ProductsDataService', () => {
     expect(productsRequest.request.params.get('filters[categories][name][$eq]')).toBe('pants');
     expect(productsRequest.request.params.get('pagination[pageSize]')).toBe('8');
 
-    pageRequest.flush({ data: { Sectional_Content: [{ __component: 'page-components.page-sections', Page_Section_Content: [
+    pageRequest.flush({ data: [{ slug: 'products-page', Sectional_Content: [{ __component: 'page-components.page-sections', Page_Section_Content: [
       { type: 'heading', level: 1, children: [{ text: 'Step Into The Men Cave' }] },
       { type: 'heading', level: 2, children: [{ text: 'Where masculinity is discovered' }] },
-    ] }] } });
+    ] }] }] });
     productsRequest.flush({ data: [{ id: 2, name: 'black jeans', description: 'Jeans for all occasions', price: 899.99, is_on_sale: false, categories: [{ name: 'pants' }], image: { url: '/uploads/jeans.jpg' } }], meta: { pagination: { page: 1, pageCount: 1, total: 1 } } });
   });
 
