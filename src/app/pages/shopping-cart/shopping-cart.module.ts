@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
 import { ShoppingCartComponent } from './shopping-cart.component';
-import { ComponentsModule } from 'src/app/components/components.module';
 
 
 @NgModule({
@@ -12,8 +11,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
   ],
   imports: [
     CommonModule,
-    ShoppingCartRoutingModule,
-    ComponentsModule
+    ShoppingCartRoutingModule
   ]
 })
 export class ShoppingCartModule { }
